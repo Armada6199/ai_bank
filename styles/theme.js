@@ -31,6 +31,7 @@ const theme = (dir) =>
     palette: {
       primary: {
         main: "#96C11F",
+        dark: "#1A5632",
       },
       secondary: {
         main: "#162645",
