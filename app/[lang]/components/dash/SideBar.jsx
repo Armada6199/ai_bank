@@ -13,13 +13,15 @@ function SideBar({ activeLink, setActiveLink }) {
     { title: "Manage Accounts", icon: <GroupAddIcon /> },
   ];
   return (
-    <Grid container item xs={12} gap={8} position={"sticky"} py={4} top={50}>
+    <Grid container item height={"100vh"} xs={12}>
       <Grid
         container
         justifyContent={"center"}
         alignItems={"center"}
         item
         xs={12}
+        borderBottom={"1px solid"}
+        sx={{ borderBottomColor: "primary.main" }}
       >
         <Grid
           container
@@ -46,12 +48,12 @@ function SideBar({ activeLink, setActiveLink }) {
           </Typography>
         </Grid>
       </Grid>
-      <Grid container item xs={12} gap={4}>
+      <Grid container item xs={12}>
         {dashLinks.map((link) => (
           <Grid
             container
             gap={1}
-            justifyContent={"center"}
+            p={2}
             onClick={() => setActiveLink(link.title)}
             sx={{
               borderRight: activeLink === link.title ? "5px solid" : "",
@@ -66,9 +68,7 @@ function SideBar({ activeLink, setActiveLink }) {
           >
             <Grid item>{link.icon}</Grid>
             <Grid item>
-              <Typography fontSize={18} fontWeight={600}>
-                {link.title}
-              </Typography>
+              <Typography fontWeight={600}>{link.title}</Typography>
             </Grid>
           </Grid>
         ))}

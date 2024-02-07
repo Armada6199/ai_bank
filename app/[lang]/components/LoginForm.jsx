@@ -34,7 +34,7 @@ function LoginForm() {
       noValidate
       onSubmit={handleSubmit(async (formData) => handleLogin(formData))}
     >
-      <Grid container item xs={12} gap={4}>
+      <Grid container item xs={12} maxHeight={"100%"} gap={4}>
         <Grid container xs={12} gap={1}>
           <Grid item xs={12}>
             <Typography variant="h4" fontWeight={600} color={"secondary.main"}>
@@ -87,7 +87,7 @@ function LoginForm() {
                 type="submit"
                 sx={{
                   borderRadius: "30px",
-                  height: "60px",
+                  height: "50px",
                   bgcolor: "primary.main",
                   fontWeight: 500,
                   fontSize: 20,

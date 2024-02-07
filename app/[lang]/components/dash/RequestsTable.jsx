@@ -9,10 +9,11 @@ import {
 } from "@mui/material";
 import MUIDataTable from "mui-datatables";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "@styles/styles.css";
 import { glassmorphismStyle } from "@styles/styles";
 import CustomTableFooter from "./CustomTableFooter";
+import { payrollsData } from "@public/constants";
 
 const options = {
   elevation: 0,
@@ -44,29 +45,19 @@ const options = {
   },
 };
 
-function RequestsTable() {
-  const data = [
-    [1245667, "42000", "24", "Approved", "Debited"],
-    [1245667, "2000", "12", "Processing", "Waiting Debit Date "],
-    [1245667, "2000", "12", "Rejected", "Not Submitted"],
-    [1245667, "50000", "24", "Approved", "Waiting Debit Date "],
-    [1245667, "42000", "24", "Approved", "Debited"],
-    [1245667, "2000", "12", "Processing", "Waiting Debit Date "],
-    [1245667, "2000", "12", "Rejected", "Not Submitted"],
-    [1245667, "50000", "24", "Approved", "Waiting Debit Date "],
-    [1245667, "42000", "24", "Approved", "Debited"],
-    [1245667, "2000", "12", "Processing", "Waiting Debit Date "],
-    [1245667, "2000", "12", "Rejected", "Not Submitted"],
-    [1245667, "50000", "24", "Approved", "Waiting Debit Date "],
-    [1245667, "42000", "24", "Approved", "Debited"],
-    [1245667, "2000", "12", "Processing", "Waiting Debit Date "],
-    [1245667, "2000", "12", "Rejected", "Not Submitted"],
-    [1245667, "50000", "24", "Approved", "Waiting Debit Date "],
-    [1245667, "42000", "24", "Approved", "Debited"],
-    [1245667, "2000", "12", "Processing", "Waiting Debit Date "],
-    [1245667, "2000", "12", "Rejected", "Not Submitted"],
-    [1245667, "50000", "24", "Approved", "Waiting Debit Date "],
-  ];
+function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
+  useEffect(() => {
+    if (activeStatus !== "All Requests") {
+      const newTableData = payrollsData.filter(
+        (e) =>
+          (e[4] === "Waiting Debit Date" && activeStatus === "Pending") ||
+          (e[4] === "Not Submitted" && activeStatus === "Rejected")
+      );
+      setTableData(newTableData);
+    } else {
+      setTableData(payrollsData);
+    }
+  }, [activeStatus]);
   const columns = [
     {
       name: "requestId",
@@ -173,29 +164,37 @@ function RequestsTable() {
 
   return (
     <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4}>
-      <Grid item>
-        <Typography variant="h6" fontWeight={"600"}>
-          Payment Agreenments
-        </Typography>
-      </Grid>
-      <Grid container item alignItems={"center"} spacing={4} xs={12}>
-        <Grid item xs={4}>
-          <FormControl fullWidth>
-            <Select labelId="paymentAgreenments" id="paymentAgreenments">
-              <MenuItem>P2342529922</MenuItem>
-              <MenuItem>E2342529922</MenuItem>
-              <MenuItem>S234252993332</MenuItem>
-            </Select>
-          </FormControl>
+      {activeLink !== "Manage Accounts" && (
+        <Grid item>
+          <Typography variant="h6" fontWeight={"600"}>
+            Payment Agreenments
+          </Typography>
         </Grid>
-        <Grid item xs={4}>
-          <Button fullWidth variant="contained">
-            Search
-          </Button>
+      )}
+      {activeLink !== "Manage Accounts" && (
+        <Grid container item alignItems={"center"} spacing={4} xs={12}>
+          <Grid item xs={4}>
+            <FormControl fullWidth>
+              <Select
+                defaultValue={"P2342529922"}
+                labelId="paymentAgreenments"
+                id="paymentAgreenments"
+              >
+                <MenuItem value={"P2342529922"}>P2342529922</MenuItem>
+                <MenuItem value={"E2342529922"}>E2342529922</MenuItem>
+                <MenuItem value={"S234252993332"}>S234252993332</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <Button fullWidth variant="contained">
+              Search
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
       <Grid container item xs={12}>
-        <MUIDataTable data={data} columns={columns} options={options} />
+        <MUIDataTable data={tableData} columns={columns} options={options} />
       </Grid>
     </Grid>
   );

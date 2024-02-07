@@ -80,7 +80,7 @@ function DrawerAppBar(props) {
           </Grid>
           <Grid container item gap={4} justifyContent={"flex-end"} md={10}>
             {navItems.map((item) => (
-              <Grid item bgcolor={"#1A563233"} borderRadius={"5px"}>
+              <Grid item bgcolor={"#F7FAED"} borderRadius={"5px"}>
                 <Button key={item} sx={{ color: "#fff" }}>
                   {item}
                 </Button>

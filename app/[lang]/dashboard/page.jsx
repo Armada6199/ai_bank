@@ -7,9 +7,13 @@ import RequestsStatusHeading from "../components/dash/RequestsStatusHeading";
 import RequestsTable from "../components/dash/RequestsTable";
 import "@styles/styles.css";
 import getDictionary from "@lib/dictionary";
+import { payrollsData } from "@public/constants";
 function page({ params: props }) {
   const [activeLink, setActiveLink] = useState("Manage Payroll Request");
   const [localeContent, setLocaleContent] = useState();
+  const [activeStatus, setActiveStatus] = useState("All Requests");
+  const [tableData, setTableData] = useState(payrollsData);
+
   useEffect(() => {
     const getLocale = async () => {
       const page = await getDictionary(props.lang);
@@ -23,10 +27,10 @@ function page({ params: props }) {
         <Grid
           container
           item
-          xs={12}
           maxHeight={"100vh"}
           position={"sticky"}
-          alignItems={"flex-start"}
+          top={50}
+          xs={12}
           md={3}
           xl={2}
         >
@@ -46,14 +50,23 @@ function page({ params: props }) {
           md={9}
           xl={10}
         >
-          {
-            <DashManageHeader
-              activeLink={activeLink}
-              headerLocale={localeContent.dashHeader}
+          <DashManageHeader
+            activeLink={activeLink}
+            headerLocale={localeContent.dashHeader}
+          />
+
+          {activeLink !== "Manage Accounts" && (
+            <RequestsStatusHeading
+              setActiveStatus={setActiveStatus}
+              activeStatus={activeStatus}
             />
-          }
-          <RequestsStatusHeading />
-          <RequestsTable />
+          )}
+          <RequestsTable
+            setTableData={setTableData}
+            tableData={tableData}
+            activeLink={activeLink}
+            activeStatus={activeStatus}
+          />
         </Grid>
       </Grid>
     )

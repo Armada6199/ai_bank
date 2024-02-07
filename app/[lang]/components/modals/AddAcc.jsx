@@ -13,6 +13,7 @@ import React from "react";
 import { glassmorphismStyle } from "@styles/styles";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import ClearIcon from "@mui/icons-material/Clear";
 function AddAcc({ activeLocale }) {
   const {
     register,
@@ -33,14 +34,7 @@ function AddAcc({ activeLocale }) {
       noValidate
       onSubmit={handleSubmit(async (formData) => handleAddUser(formData))}
     >
-      <Grid
-        container
-        item
-        xs={12}
-        justifyContent={"center"}
-        gap={4}
-        sx={{ ...glassmorphismStyle, borderRadius: "0", p: 0 }}
-      >
+      <Grid container item xs={12} justifyContent={"center"} gap={4}>
         <Grid
           container
           alignItems={"center"}
@@ -48,8 +42,20 @@ function AddAcc({ activeLocale }) {
           item
           height={"65px"}
           bgcolor={"primary.main"}
+          sx={{ borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
         >
-          <Typography variant="h5">{activeLocale.modal.action}</Typography>
+          <Grid item xs={10}>
+            <Typography variant="h5">{activeLocale.modal.action}</Typography>
+          </Grid>
+          <Grid
+            container
+            sx={{ cursor: "pointer" }}
+            justifyContent={"flex-end"}
+            item
+            xs={2}
+          >
+            <ClearIcon />
+          </Grid>
         </Grid>
         <Grid container item p={4}>
           <Grid container item spacing={4} xs={12}>

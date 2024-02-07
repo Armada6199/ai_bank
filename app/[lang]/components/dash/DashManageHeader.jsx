@@ -15,33 +15,45 @@ function DashManageHeader({ headerLocale, activeLink }) {
   const handleOpenAcc = () => setOpenAccount(true);
 
   return (
-    <Grid container item gap={4} wrap="nowrap" xs={12}>
-      <Grid
-        container
-        justifyContent={"center"}
-        alignItems={"center"}
-        xs={12}
-        height={"100px"}
-        md={2}
-        bgcolor={"#fff"}
-        borderRadius={"10px"}
-      >
-        <CreditCardIcon sx={{ fontSize: 48, color: "primary.main" }} />
-      </Grid>
-      <Grid container item xs={12} md={5}>
-        <Grid item xs={12}>
-          <Typography variant="h6">{activeLocale.title}</Typography>
+    <Grid
+      container
+      item
+      gap={4}
+      wrap="nowrap"
+      justifyContent={"space-between"}
+      xs={12}
+    >
+      <Grid container item xs={8} gap={4}>
+        <Grid
+          container
+          justifyContent={"center"}
+          alignItems={"center"}
+          xs={2}
+          height={"100px"}
+          bgcolor={"#fff"}
+          borderRadius={"10px"}
+        >
+          <CreditCardIcon sx={{ fontSize: 48, color: "primary.main" }} />
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="body1">{activeLocale.description}</Typography>
+        <Grid container item xs={12} md={6}>
+          <Grid item xs={12}>
+            <Typography variant="h6" fontWeight={700}>
+              {activeLocale.title}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="body1" fontWeight={500}>
+              {activeLocale.description}
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
-      <Grid item alignSelf={"center"} xs={12} md={5}>
+      <Grid item alignSelf={"center"} xs={12} md={2}>
         <Button
           fullWidth
           variant="contained"
           onClick={() => handleOpenAcc()}
-          sx={{ borderRadius: "20px" }}
+          sx={{ borderRadius: "20px", fontWeight: 700 }}
         >
           {activeLocale.buttonText}
         </Button>
@@ -57,7 +69,7 @@ function DashManageHeader({ headerLocale, activeLink }) {
           justifyContent: "center",
         }}
       >
-        <Grid container item xs={10}>
+        <Grid container item xs={10} sx={glassmorphismStyle}>
           {activeLink == "Manage Payroll Request" ? (
             ""
           ) : (

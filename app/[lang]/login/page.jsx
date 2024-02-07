@@ -12,19 +12,19 @@ async function page({ params: props }) {
     <Grid
       container
       xs={12}
-      height={"100vh"}
-      maxHeight={"100vh"}
       p={4}
+      sx={{ height: "100vh" }}
       gap={12}
       wrap="nowrap"
       bgcolor={"background.default"}
     >
-      <Grid container xs={12} gap={12} md={6}>
+      <Grid container xs={12} maxHeight={"100vh"} gap={4} md={6}>
         <Grid item xs={12}>
           <Image src={bankLogoTransparent} alt="logo" />
         </Grid>
-
-        <LoginForm />
+        <Grid container item>
+          <LoginForm />
+        </Grid>
       </Grid>
       <Grid
         container
