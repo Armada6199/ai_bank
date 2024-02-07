@@ -1,8 +1,8 @@
 "use client";
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import { handleLogin } from "@utils/auth";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 
 function LoginForm() {
@@ -12,17 +12,17 @@ function LoginForm() {
     handleSubmit,
   } = useForm();
   const { push } = useRouter();
-  async function loginRedirect(formData) {
+  async function handleLogin(formData) {
     try {
-      const loginResponse = await handleLogin(
-        formData.username,
-        formData.password
-      );
+      const loginResponse = await signIn("credentials", {
+        ...formData,
+        redirect: false,
+      });
+      console.log(loginResponse);
       if (loginResponse?.error) {
         console.log("login failed");
       } else {
-        console.log("else");
-
+        console.log("loggedin");
         push("/dashboard");
       }
     } catch (error) {
@@ -32,13 +32,16 @@ function LoginForm() {
   return (
     <form
       noValidate
-      onSubmit={handleSubmit(async (formData) => loginRedirect(formData))}
+      onSubmit={handleSubmit(async (formData) => handleLogin(formData))}
     >
       <Grid container item xs={12} gap={4}>
-        <Grid xs={12}>
-          <Typography variant="h4" fontWeight={600} color={"secondary.main"}>
-            Login
-          </Typography>
+        <Grid container xs={12} gap={1}>
+          <Grid item xs={12}>
+            <Typography variant="h4" fontWeight={600} color={"secondary.main"}>
+              Login
+            </Typography>
+          </Grid>
+          <Grid item xs={1} height={"4px"} bgcolor={"primary.main"} />
         </Grid>
         <Grid xs={12}>
           <Typography variant="h6">Login with username and password</Typography>
@@ -50,9 +53,8 @@ function LoginForm() {
             </Typography>
             <TextField
               fullWidth
-              name="email"
-              {...register("email", { required: "Enter Your Email" })}
-              type="email"
+              {...register("username", { required: "Enter Your Email" })}
+              type="text"
             />
             {errors.email && (
               <Typography color={"red"} variant="body2">

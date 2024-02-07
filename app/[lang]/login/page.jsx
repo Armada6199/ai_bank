@@ -3,6 +3,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import bankLogoTransparent from "@public/assets/Screenshot_2024-02-05_172409-removebg-preview.png";
 import LoginForm from "../components/LoginForm";
+import logoClipped from "@public/assets/logo1.png";
 import "@styles/styles.css";
 import Image from "next/image";
 async function page({ params: props }) {
@@ -20,12 +21,7 @@ async function page({ params: props }) {
     >
       <Grid container xs={12} gap={12} md={6}>
         <Grid item xs={12}>
-          <Image
-            width={200}
-            height={100}
-            src={bankLogoTransparent}
-            alt="logo"
-          />
+          <Image src={bankLogoTransparent} alt="logo" />
         </Grid>
 
         <LoginForm />
@@ -36,7 +32,8 @@ async function page({ params: props }) {
         item
         xs={12}
         className="login_background"
-        sx={{ borderBottomRightRadius: "220px" }}
+        border={"none"}
+        sx={{ borderBottomRightRadius: "220px", position: "relative" }}
         md={6}
       >
         <Box
@@ -44,25 +41,17 @@ async function page({ params: props }) {
             position: "absolute",
             width: "100%",
             height: "100%",
-            bgcolor: "rgba(255,255,255,.9)",
+            bgcolor: "rgba(255,255,255,.8)",
             borderBottomRightRadius: "220px",
+            border: "none",
+
             zIndex: 1,
           }}
         />
         <Grid container item xs={10} zIndex={2} gap={4} p={4}>
-          <Grid
-            style={{
-              borderBottomLeftRadius: "15px",
-              borderBottomRightRadius: "50px",
-            }}
-            width={120}
-            bgcolor={"#fff"}
-            height={150}
-            item
-            xs={12}
-          >
+          <Grid item xs={4}>
             <Image
-              src={bankLogoTransparent}
+              src={logoClipped}
               style={{
                 imageRendering: "crisp-edges",
                 maxHeight: "150px",
@@ -77,16 +66,29 @@ async function page({ params: props }) {
               fontWeight={"600"}
               color={"secondary.main"}
             >
-              Welcome To aiBank Corporate Internet Banking{" "}
+              Welcome To <span style={{ color: "#96C11F" }}>ai</span>Bank{" "}
+              <span style={{ color: "#96C11F" }}>Corporate</span> Internet
+              Banking{" "}
             </Typography>
           </Grid>
           <Grid xs={12}>
-            <Typography variant="body1" fontWeight={500}>
+            <Typography variant="h6" fontWeight={500}>
               Manage day-to-day business banking needs from one central
               location.
             </Typography>
           </Grid>
         </Grid>
+        <Box
+          sx={{
+            position: "absolute",
+            clipPath: " polygon(100% 0, 0% 100%, 100% 100%)",
+            bgcolor: "primary.main",
+            height: "80px",
+            width: "80px",
+            bottom: 0,
+            right: 0,
+          }}
+        />
       </Grid>
     </Grid>
   );

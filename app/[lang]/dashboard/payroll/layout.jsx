@@ -3,7 +3,7 @@ import React from "react";
 
 function layout({ children }) {
   return (
-    <Grid container xs={12} bgcolor={'red'}>
+    <Grid container xs={12}>
       <Grid
         container
         item

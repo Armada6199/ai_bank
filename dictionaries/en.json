@@ -1,5 +1,37 @@
 {
   "mainInfo": {
     "bankName": "ARAB INVESTMENT BANK"
+  },
+  "dashHeader": {
+    "managePayroll": {
+      "title": "Manage Payroll Requests",
+      "description": "Here you can view and manage all Payroll requests",
+      "buttonText": "New Payroll Request",
+      "modal": {
+        "action": "Add New Account"
+      }
+    },
+    "manageAccounts": {
+      "title": "Manage Account",
+      "description": "Here you can view and manage all accounts",
+      "buttonText": "New Account ",
+      "modal": {
+        "action": "Add New Account",
+        "accountInputLabel": "Account name *",
+        "emailInputLabel": "Email *",
+        "accountTypeLabel": "Account Type",
+        "accountTypes": [
+          { "localeVal": "Admin", "value": "admins" },
+          { "localeVal": "Maker", "value": "makers" },
+          { "localeVal": "Checker", "value": "checkers" }
+        ],
+        "accountStatus": ["Active", "Not Active"],
+        "buttonText": "Add"
+      }
+    }
+  },
+  "dashSidebar": {
+    "links": ["Manage Payroll Request", "Manage Accounts"],
+    "rightsText": "All rights reserved for ai bank 2023"
   }
 }

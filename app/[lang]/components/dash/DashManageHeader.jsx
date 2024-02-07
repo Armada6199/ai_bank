@@ -1,8 +1,19 @@
-import { Button, Grid, Typography } from "@mui/material";
-import React from "react";
+"use client";
+import { Button, Grid, Modal, Typography } from "@mui/material";
+import React, { useState } from "react";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
+import { glassmorphismStyle } from "@styles/styles";
+import AddAcc from "../modals/AddAcc";
 
-function DashManageHeader() {
+function DashManageHeader({ headerLocale, activeLink }) {
+  const activeLocale =
+    activeLink === "Manage Payroll Request"
+      ? headerLocale.managePayroll
+      : headerLocale.manageAccounts;
+  const [openAccount, setOpenAccount] = useState(false);
+  const handleCloseAcc = () => setOpenAccount(false);
+  const handleOpenAcc = () => setOpenAccount(true);
+
   return (
     <Grid container item gap={4} wrap="nowrap" xs={12}>
       <Grid
@@ -19,19 +30,41 @@ function DashManageHeader() {
       </Grid>
       <Grid container item xs={12} md={5}>
         <Grid item xs={12}>
-          <Typography variant="h6">Manage Payroll Requests</Typography>
+          <Typography variant="h6">{activeLocale.title}</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body1">
-            Here you can view and manage all Payroll requests
-          </Typography>
+          <Typography variant="body1">{activeLocale.description}</Typography>
         </Grid>
       </Grid>
       <Grid item alignSelf={"center"} xs={12} md={5}>
-        <Button fullWidth variant="contained" sx={{ borderRadius: "20px" }}>
-          New Payroll Request
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={() => handleOpenAcc()}
+          sx={{ borderRadius: "20px" }}
+        >
+          {activeLocale.buttonText}
         </Button>
       </Grid>
+      <Modal
+        open={openAccount}
+        onClose={handleCloseAcc}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Grid container item xs={10}>
+          {activeLink == "Manage Payroll Request" ? (
+            ""
+          ) : (
+            <AddAcc activeLocale={activeLocale} />
+          )}
+        </Grid>
+      </Modal>
     </Grid>
   );
 }

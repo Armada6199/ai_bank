@@ -1,5 +1,22 @@
 {
-    "mainInfo":{
-        "bankName":"بنك الأستثمار العربي"
+  "mainInfo": {
+    "bankName": "بنك الأستثمار العربي"
+  },
+
+  "dashHeader": {
+    "managePayroll": {
+      "title": "إدارة طلبات الرواتب",
+      "description": "هنا يمكنك عرض وإدارة جميع طلبات الرواتب",
+      "buttonText": "طلب راتب جديد"
+    },
+    "manageAccounts": {
+      "title": "ادارة الحسابات",
+      "description": " بأمكانك ادارة الحسابات ",
+      "buttonText": "اضافة حساب جديد "
     }
+  },
+  "dashSidebar": {
+    "links": ["إدارة طلبات الرواتب", "إدارة الحسابات"],
+    "rightsText": "جميع الحقوق محفوظة لبنك الأستثمار العربي  2023"
+  }
 }

@@ -1,36 +1,62 @@
+"use client";
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../components/dash/SideBar";
 import DashManageHeader from "../components/dash/DashManageHeader";
 import RequestsStatusHeading from "../components/dash/RequestsStatusHeading";
 import RequestsTable from "../components/dash/RequestsTable";
 import "@styles/styles.css";
-function page() {
+import getDictionary from "@lib/dictionary";
+function page({ params: props }) {
+  const [activeLink, setActiveLink] = useState("Manage Payroll Request");
+  const [localeContent, setLocaleContent] = useState();
+  useEffect(() => {
+    const getLocale = async () => {
+      const page = await getDictionary(props.lang);
+      setLocaleContent(page);
+    };
+    getLocale();
+  }, []);
   return (
-    <Grid
-      container
-      item
-      alignItems={"flex-start"}
-      xs={12}
-      sx={{ height: "calc(100vh - 60px)" }}
-    >
-      <Grid container item xs={12} md={2}>
-        <SideBar />
+    localeContent && (
+      <Grid container item xs={12}>
+        <Grid
+          container
+          item
+          xs={12}
+          maxHeight={"100vh"}
+          position={"sticky"}
+          alignItems={"flex-start"}
+          md={3}
+          xl={2}
+        >
+          <SideBar
+            sidebarLocale={localeContent.dashSidebar}
+            activeLink={activeLink}
+            setActiveLink={setActiveLink}
+          />
+        </Grid>
+        <Grid
+          container
+          item
+          bgcolor={"background.default"}
+          gap={4}
+          p={4}
+          xs={12}
+          md={9}
+          xl={10}
+        >
+          {
+            <DashManageHeader
+              activeLink={activeLink}
+              headerLocale={localeContent.dashHeader}
+            />
+          }
+          <RequestsStatusHeading />
+          <RequestsTable />
+        </Grid>
       </Grid>
-      <Grid
-        container
-        item
-        bgcolor={"background.default"}
-        gap={4}
-        p={4}
-        xs={12}
-        md={10}
-      >
-        <DashManageHeader />
-        <RequestsStatusHeading />
-        <RequestsTable />
-      </Grid>
-    </Grid>
+    )
   );
 }
 

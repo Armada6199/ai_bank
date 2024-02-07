@@ -1,32 +1,25 @@
+"use client";
 import { Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import bankLogoShaped from "@public/assets/logo1.png";
 import Image from "next/image";
 
-function SideBar() {
+function SideBar({ activeLink, setActiveLink }) {
   const dashLinks = [
     { title: "Manage Payroll Request", icon: <CreditCardIcon /> },
     { title: "Manage Accounts", icon: <GroupAddIcon /> },
   ];
   return (
-    <Grid
-      container
-      item
-      xs={12}
-      justifyContent={"space-between"}
-      p={4}
-      bgcolor={"#fff"}
-    >
+    <Grid container item xs={12} gap={8} position={"sticky"} py={4} top={50}>
       <Grid
         container
         justifyContent={"center"}
         alignItems={"center"}
         item
         xs={12}
-        gap={4}
       >
         <Grid
           container
@@ -53,12 +46,29 @@ function SideBar() {
           </Typography>
         </Grid>
       </Grid>
-      <Grid container item xs={12}>
+      <Grid container item xs={12} gap={4}>
         {dashLinks.map((link) => (
-          <Grid container alignItems={"flex-end"} gap={1} item xs={12}>
+          <Grid
+            container
+            gap={1}
+            justifyContent={"center"}
+            onClick={() => setActiveLink(link.title)}
+            sx={{
+              borderRight: activeLink === link.title ? "5px solid" : "",
+              borderRightColor: activeLink === link.title ? "primary.main" : "",
+              cursor: "pointer",
+            }}
+            bgcolor={
+              activeLink === link.title ? "primary.light" : "transparent"
+            }
+            item
+            xs={12}
+          >
             <Grid item>{link.icon}</Grid>
             <Grid item>
-              <Typography variant="h6">{link.title}</Typography>
+              <Typography fontSize={18} fontWeight={600}>
+                {link.title}
+              </Typography>
             </Grid>
           </Grid>
         ))}
@@ -76,8 +86,6 @@ function SideBar() {
             alt="bank logo"
             style={{ height: "150px", width: "100%" }}
           />
-        </Grid>
-        <Grid item xs={12}>
           <Typography variant="h6">
             All rights reserved for ai bank 2023
           </Typography>
