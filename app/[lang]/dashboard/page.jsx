@@ -27,9 +27,9 @@ function page({ params: props }) {
         <Grid
           container
           item
-          maxHeight={"100vh"}
           position={"sticky"}
           top={50}
+          sx={{ height: "calc(100vh - 60px)" }}
           xs={12}
           md={3}
           xl={2}

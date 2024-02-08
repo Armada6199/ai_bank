@@ -13,72 +13,81 @@ function SideBar({ activeLink, setActiveLink }) {
     { title: "Manage Accounts", icon: <GroupAddIcon /> },
   ];
   return (
-    <Grid container item height={"100vh"} xs={12}>
-      <Grid
-        container
-        justifyContent={"center"}
-        alignItems={"center"}
-        item
-        xs={12}
-        borderBottom={"1px solid"}
-        sx={{ borderBottomColor: "primary.main" }}
-      >
+    <Grid container item alignItems={"flex-start"} py={4} xs={12}>
+      <Grid container item xs={12} gap={4}>
         <Grid
           container
           justifyContent={"center"}
           alignItems={"center"}
           item
-          xs={4}
+          xs={12}
+          gap={2}
+          borderBottom={"1px solid"}
           sx={{
-            border: "1px solid",
-            borderColor: "primary.main",
-            height: "80px",
-            width: "80px",
-            borderRadius: "50%",
+            borderBottomColor: "primary.main",
           }}
         >
-          <AccountCircleIcon sx={{ fontSize: 40, color: "primary.main" }} />
-        </Grid>
-        <Grid xs={12} textAlign={"center"}>
-          <Typography variant="h5" color={""} fontWeight={600}>
-            ALI
-          </Typography>
-          <Typography variant="body1" color={""}>
-            account owner
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid container item xs={12}>
-        {dashLinks.map((link) => (
           <Grid
             container
-            gap={1}
-            p={2}
-            onClick={() => setActiveLink(link.title)}
-            sx={{
-              borderRight: activeLink === link.title ? "5px solid" : "",
-              borderRightColor: activeLink === link.title ? "primary.main" : "",
-              cursor: "pointer",
-            }}
-            bgcolor={
-              activeLink === link.title ? "primary.light" : "transparent"
-            }
+            justifyContent={"center"}
+            alignItems={"center"}
             item
-            xs={12}
+            xs={4}
+            sx={{
+              border: "1px solid",
+              borderColor: "primary.main",
+              height: "80px",
+              width: "80px",
+              borderRadius: "50%",
+              boxShadow: " 0px 7px 6px -3px rgba(112,95,112,1)",
+            }}
           >
-            <Grid item>{link.icon}</Grid>
-            <Grid item>
-              <Typography fontWeight={600}>{link.title}</Typography>
-            </Grid>
+            <AccountCircleIcon sx={{ fontSize: 40, color: "primary.main" }} />
           </Grid>
-        ))}
+          <Grid xs={12} textAlign={"center"}>
+            <Typography variant="h5" color={""} fontWeight={600}>
+              ALI
+            </Typography>
+            <Typography variant="body1" color={""}>
+              account owner
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container gap={4} item xs={12}>
+          {dashLinks.map((link) => (
+            <Grid
+              container
+              gap={1}
+              px={2}
+              onClick={() => setActiveLink(link.title)}
+              sx={{
+                borderRight: activeLink === link.title ? "5px solid" : "",
+                borderRightColor:
+                  activeLink === link.title ? "primary.main" : "",
+                cursor: "pointer",
+              }}
+              bgcolor={
+                activeLink === link.title ? "primary.light" : "transparent"
+              }
+              item
+              xs={12}
+            >
+              <Grid item>{link.icon}</Grid>
+              <Grid item>
+                <Typography fontWeight={600}>{link.title}</Typography>
+              </Grid>
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
+
       <Grid
         container
         item
         xs={12}
         textAlign={"center"}
         justifyContent={"center"}
+        alignSelf={"flex-end"}
       >
         <Grid item xs={8}>
           <Image

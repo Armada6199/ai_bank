@@ -8,18 +8,18 @@ const dmFont = DM_Sans({
 const theme = (dir) =>
   createTheme({
     direction: dir,
-    components: {
-      // MuiButton: {
-      //   styleOverrides: {
-      //     root: {
-      //       height: "45px",
-      //       ":hover": {
-      //         borderColor: "#dd752d",
-      //       },
-      //     },
-      //   },
-      // },
-    },
+    // components: {
+    //   MuiButton: {
+    //     styleOverrides: {
+    //       root: {
+    //         height: "45px",
+    //         ":hover": {
+    //           borderColor: "#dd752d",
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
     typography: {
       fontFamily: [dmFont.style.fontFamily, "sans-serif"].join(","),
       typography: {
@@ -32,7 +32,7 @@ const theme = (dir) =>
       primary: {
         main: "#96C11F",
         dark: "#1A5632",
-        light:'#DBEAB3'
+        light: "#DBEAB3",
       },
       secondary: {
         main: "#162645",

@@ -13,7 +13,6 @@ import React from "react";
 import { glassmorphismStyle } from "@styles/styles";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import ClearIcon from "@mui/icons-material/Clear";
 function AddAcc({ activeLocale }) {
   const {
     register,
@@ -34,7 +33,14 @@ function AddAcc({ activeLocale }) {
       noValidate
       onSubmit={handleSubmit(async (formData) => handleAddUser(formData))}
     >
-      <Grid container item xs={12} justifyContent={"center"} gap={4}>
+      <Grid
+        container
+        item
+        xs={12}
+        justifyContent={"center"}
+        gap={4}
+        sx={{ ...glassmorphismStyle, borderRadius: "0", p: 0 }}
+      >
         <Grid
           container
           alignItems={"center"}
@@ -42,22 +48,10 @@ function AddAcc({ activeLocale }) {
           item
           height={"65px"}
           bgcolor={"primary.main"}
-          sx={{ borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
         >
-          <Grid item xs={10}>
-            <Typography variant="h5">{activeLocale.modal.action}</Typography>
-          </Grid>
-          <Grid
-            container
-            sx={{ cursor: "pointer" }}
-            justifyContent={"flex-end"}
-            item
-            xs={2}
-          >
-            <ClearIcon />
-          </Grid>
+          <Typography variant="h5">{activeLocale.modal.action}</Typography>
         </Grid>
-        <Grid container item p={4}>
+        <Grid container item p={4} gap={4}>
           <Grid container item spacing={4} xs={12}>
             <Grid item xs={6}>
               <Typography>{activeLocale.modal.accountInputLabel}</Typography>
@@ -79,39 +73,41 @@ function AddAcc({ activeLocale }) {
               />
             </Grid>
           </Grid>
-          <Grid container item xs={6} p={4}>
-            <Grid item xs={12}>
-              <FormControl>
-                <FormLabel>{activeLocale?.modal?.accountTypeLabel}</FormLabel>
-                <RadioGroup row>
-                  {activeLocale.modal.accountTypes.map((type) => (
-                    <FormControlLabel
-                      {...register("userType", {
-                        required: "Choose User Type",
-                      })}
-                      value={type.value}
-                      control={<Radio />}
-                      label={type.localeVal}
-                    />
-                  ))}
-                </RadioGroup>
-              </FormControl>
+          <Grid container item xs={12} spacing={4}>
+            <Grid container item xs={6}>
+              <Grid item xs={12}>
+                <FormControl>
+                  <FormLabel>{activeLocale?.modal?.accountTypeLabel}</FormLabel>
+                  <RadioGroup row>
+                    {activeLocale.modal.accountTypes.map((type) => (
+                      <FormControlLabel
+                        {...register("userType", {
+                          required: "Choose User Type",
+                        })}
+                        value={type.value}
+                        control={<Radio />}
+                        label={type.localeVal}
+                      />
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container item xs={6} spacing={4} p={4}>
-            <Grid container item xs={12}>
-              <FormControl>
-                <FormLabel>{activeLocale?.modal?.accountTypeLabel}</FormLabel>
-                <RadioGroup row>
-                  {activeLocale.modal.accountStatus.map((type) => (
-                    <FormControlLabel
-                      value="active"
-                      control={<Radio />}
-                      label={type}
-                    />
-                  ))}
-                </RadioGroup>
-              </FormControl>
+            <Grid container item xs={6} spacing={4}>
+              <Grid container item xs={12}>
+                <FormControl>
+                  <FormLabel>{activeLocale?.modal?.accountTypeLabel}</FormLabel>
+                  <RadioGroup row>
+                    {activeLocale.modal.accountStatus.map((type) => (
+                      <FormControlLabel
+                        value="active"
+                        control={<Radio />}
+                        label={type}
+                      />
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

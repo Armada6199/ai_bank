@@ -14,7 +14,7 @@ function AccManagerHeader() {
         md={2}
         bgcolor={"#fff"}
         borderRadius={"10px"}
-      >
+      >[]
         <CreditCardIcon sx={{ fontSize: 48, color: "primary.main" }} />
       </Grid>
       <Grid container item xs={12} md={5}>

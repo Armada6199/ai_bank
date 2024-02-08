@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
-import { handleSearchUser, handleCreatUser } from "../ldap";
+import { handleCreatUser } from "../ldap";
 export async function POST(req) {
   try {
     const body = await req.json();
     const userData = body;
-    console.log(userData);
     if (!userData.email || !userData.accountName || !userData.userType) {
       return NextResponse.json(
         { message: "All fields are required" },
@@ -18,7 +17,6 @@ export async function POST(req) {
     //     { status: 409 }
     //   );
     const createdUser = await handleCreatUser(userData);
-    console.log(createdUser);
     return NextResponse.json({ message: "User Created" }, { status: 201 });
   } catch (error) {
     console.log(error);

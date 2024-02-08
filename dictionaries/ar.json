@@ -2,7 +2,26 @@
   "mainInfo": {
     "bankName": "بنك الأستثمار العربي"
   },
-
+  "loginPage": {
+    "logoAltText": "logo",
+    "welcomeMessage": {
+      "title": "مرحبًا في",
+      "bankTitle":"بنك",
+      "bankName": " الأستثمار العربي",
+      "CorporateLabel": "منظومة",
+      "internetBanking": "الخدمات المصرفية عبر الإنترنت"
+    },
+    "description": "إدارة احتياجات الأعمال المصرفية اليومية من مكان واحد مركزي.",
+    "loginForm": {
+      "title": "تسجيل الدخول",
+      "description": "تسجيل الدخول باستخدام اسم المستخدم وكلمة المرور",
+      "usernameLabel": "أدخل اسم المستخدم الخاص بك",
+      "passwordLabel": "كلمة المرور",
+      "usernameErrorMessage": "أدخل بريدك الإلكتروني",
+      "passwordErrorMessage": "أدخل كلمة المرور الخاصة بك",
+      "submitButton": "تسجيل الدخول"
+    }
+  },
   "dashHeader": {
     "managePayroll": {
       "title": "إدارة طلبات الرواتب",

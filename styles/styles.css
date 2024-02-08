@@ -24,6 +24,21 @@ body {
   right: auto !important;
   left: auto !important;
 }
-.mui-style-ltr-1j4t9z4-MuiStepper-root .MuiStepLabel-root{
+.mui-style-ltr-1j4t9z4-MuiStepper-root .MuiStepLabel-root {
   font-size: 40;
-}   
+}
+.tss-tlx3x1-MUIDataTableToolbar-root {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.tss-qbo1l6-MUIDataTableToolbar-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: row-reverse;
+  margin-bottom: 2em;
+  padding: 0;
+}

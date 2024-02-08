@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import { glassmorphismStyle } from "@styles/styles";
 import AddAcc from "../modals/AddAcc";
+import Payroll from "../modals/Payroll";
 
 function DashManageHeader({ headerLocale, activeLink }) {
   const activeLocale =
@@ -21,14 +22,16 @@ function DashManageHeader({ headerLocale, activeLink }) {
       gap={4}
       wrap="nowrap"
       justifyContent={"space-between"}
+      alignItems={"flex-start"}
       xs={12}
     >
-      <Grid container item xs={8} gap={4}>
+      <Grid container item xs={12} gap={4}>
         <Grid
           container
           justifyContent={"center"}
           alignItems={"center"}
           xs={2}
+          md={1}
           height={"100px"}
           bgcolor={"#fff"}
           borderRadius={"10px"}
@@ -47,17 +50,24 @@ function DashManageHeader({ headerLocale, activeLink }) {
             </Typography>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item alignSelf={"center"} xs={12} md={2}>
-        <Button
-          fullWidth
-          variant="contained"
-          onClick={() => handleOpenAcc()}
-          sx={{ borderRadius: "20px", fontWeight: 700 }}
+        <Grid
+          container
+          item
+          xs={12}
+          alignSelf={"center"}
+          justifyContent={"flex-end"}
+          md={4}
         >
-          {activeLocale.buttonText}
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleOpenAcc()}
+            sx={{ borderRadius: "20px", fontWeight: 700 }}
+          >
+            {activeLocale.buttonText}
+          </Button>
+        </Grid>
       </Grid>
+
       <Modal
         open={openAccount}
         onClose={handleCloseAcc}
@@ -69,9 +79,9 @@ function DashManageHeader({ headerLocale, activeLink }) {
           justifyContent: "center",
         }}
       >
-        <Grid container item xs={10} sx={glassmorphismStyle}>
+        <Grid container item xs={10}>
           {activeLink == "Manage Payroll Request" ? (
-            ""
+            <Payroll />
           ) : (
             <AddAcc activeLocale={activeLocale} />
           )}

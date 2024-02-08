@@ -2,6 +2,26 @@
   "mainInfo": {
     "bankName": "ARAB INVESTMENT BANK"
   },
+  "loginPage": {
+    "logoAltText": "logo",
+    "welcomeMessage": {
+      "title": "Welcome To",
+      "bankTitle": "BANK",
+      "bankName": "ai",
+      "CorporateLabel": "Corporate",
+      "internetBanking": "Internet Banking"
+    },
+    "description": "Manage day-to-day business banking needs from one central location.",
+    "loginForm": {
+      "title": "Login",
+      "description": "Login with username and password",
+      "usernameLabel": "Enter Your username",
+      "passwordLabel": "Password",
+      "usernameErrorMessage": "Enter Your Email",
+      "passwordErrorMessage": "Enter Your Password",
+      "submitButton": "Login"
+    }
+  },
   "dashHeader": {
     "managePayroll": {
       "title": "Manage Payroll Requests",

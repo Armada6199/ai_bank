@@ -15,37 +15,70 @@ import { glassmorphismStyle } from "@styles/styles";
 import CustomTableFooter from "./CustomTableFooter";
 import { payrollsData } from "@public/constants";
 
-const options = {
-  elevation: 0,
-  pagination: true,
-  rowsPerPage: 5,
-  border: "none",
-  viewColumns: false,
-  selectableRowsHeader: true,
-  responsive: "vertical",
-
-  customFooter: (
-    count,
-    page,
-    rowsPerPage,
-    changeRowsPerPage,
-    changePage,
-    textLabels
-  ) => {
-    return (
-      <CustomTableFooter
-        count={count}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        changeRowsPerPage={changeRowsPerPage}
-        changePage={changePage}
-        textLabels={textLabels}
-      />
-    );
-  },
-};
-
 function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
+  const options = {
+    elevation: 0,
+    pagination: true,
+    rowsPerPage: 5,
+    border: "none",
+    viewColumns: false,
+    selectableRowsHeader: true,
+    responsive: "vertical",
+    customToolbar: () => {
+      return (
+        <Grid container gap={1} item xs={12}>
+          {activeLink !== "Manage Accounts" && (
+            <Grid item>
+              <Typography variant="h6" fontWeight={"600"}>
+                Payment Agreenments
+              </Typography>
+            </Grid>
+          )}
+          {activeLink !== "Manage Accounts" && (
+            <Grid container item alignItems={"center"} spacing={4} xs={12}>
+              <Grid item xs={4}>
+                <FormControl fullWidth>
+                  <Select
+                    defaultValue={"P2342529922"}
+                    labelId="paymentAgreenments"
+                    id="paymentAgreenments"
+                  >
+                    <MenuItem value={"P2342529922"}>P2342529922</MenuItem>
+                    <MenuItem value={"E2342529922"}>E2342529922</MenuItem>
+                    <MenuItem value={"S234252993332"}>S234252993332</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={4}>
+                <Button fullWidth variant="contained">
+                  Search
+                </Button>
+              </Grid>
+            </Grid>
+          )}
+        </Grid>
+      );
+    },
+    customFooter: (
+      count,
+      page,
+      rowsPerPage,
+      changeRowsPerPage,
+      changePage,
+      textLabels
+    ) => {
+      return (
+        <CustomTableFooter
+          count={count}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          changeRowsPerPage={changeRowsPerPage}
+          changePage={changePage}
+          textLabels={textLabels}
+        />
+      );
+    },
+  };
   useEffect(() => {
     if (activeStatus !== "All Requests") {
       const newTableData = payrollsData.filter(
@@ -164,38 +197,7 @@ function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
 
   return (
     <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4}>
-      {activeLink !== "Manage Accounts" && (
-        <Grid item>
-          <Typography variant="h6" fontWeight={"600"}>
-            Payment Agreenments
-          </Typography>
-        </Grid>
-      )}
-      {activeLink !== "Manage Accounts" && (
-        <Grid container item alignItems={"center"} spacing={4} xs={12}>
-          <Grid item xs={4}>
-            <FormControl fullWidth>
-              <Select
-                defaultValue={"P2342529922"}
-                labelId="paymentAgreenments"
-                id="paymentAgreenments"
-              >
-                <MenuItem value={"P2342529922"}>P2342529922</MenuItem>
-                <MenuItem value={"E2342529922"}>E2342529922</MenuItem>
-                <MenuItem value={"S234252993332"}>S234252993332</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={3}>
-            <Button fullWidth variant="contained">
-              Search
-            </Button>
-          </Grid>
-        </Grid>
-      )}
-      <Grid container item xs={12}>
-        <MUIDataTable data={tableData} columns={columns} options={options} />
-      </Grid>
+      <MUIDataTable data={tableData} columns={columns} options={options} />
     </Grid>
   );
 }
