@@ -1,7 +1,7 @@
 import { Button, Grid } from "@mui/material";
 import React from "react";
 
-function PayrollNavigation() {
+function PayrollNavigation({ handleNext,handleBack }) {
   return (
     <Grid
       container
@@ -12,7 +12,7 @@ function PayrollNavigation() {
       p={4}
     >
       <Grid item xs={2}>
-        <Button fullWidth variant="outlined">
+        <Button onClick={handleBack} fullWidth variant="outlined">
           Back
         </Button>
       </Grid>
@@ -23,7 +23,7 @@ function PayrollNavigation() {
           </Button>
         </Grid>
         <Grid item xs={4}>
-          <Button fullWidth variant="contained">
+          <Button onClick={handleNext} fullWidth variant="contained">
             Next
           </Button>
         </Grid>
