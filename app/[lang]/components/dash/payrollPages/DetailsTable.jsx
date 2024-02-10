@@ -1,7 +1,14 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+"use client";
+import { Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import React from "react";
+import BulkUpload from "../../modals/BulkUpload";
+import { glassmorphismStyle } from "@styles/styles";
 
 function DetailsTable() {
+  const [openBulk, setOpenBulk] = React.useState(false);
+
+  const openBulkModal = () => setOpenBulk(true);
+  const closeBulkModal = () => setOpenBulk(false);
   return (
     <Grid container item>
       <Grid container item>
@@ -10,8 +17,12 @@ function DetailsTable() {
         </Grid>
         <Grid container item spacing={4} xs={6}>
           <Grid item xs={6}>
-            <Button fullWidth variant="contained">
-              Bult Upload
+            <Button
+              onClick={() => openBulkModal()}
+              fullWidth
+              variant="contained"
+            >
+              BULK Upload
             </Button>
           </Grid>
           <Grid item xs={6}>
@@ -77,6 +88,19 @@ function DetailsTable() {
           </Grid>
         </Grid>
       </Grid>
+      <Modal
+        open={openBulk}
+        onClose={closeBulkModal}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Grid container item xs={8} sx={glassmorphismStyle}>
+          <BulkUpload />
+        </Grid>
+      </Modal>
     </Grid>
   );
 }

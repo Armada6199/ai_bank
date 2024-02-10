@@ -18,7 +18,7 @@ export default Payroll;
 
 function Payroll() {
   const steps = ["Select Payment Agreements", "Payroll Details ", "Summary"];
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(2);
   const handleNext = () => setActiveStep((prev) => prev + 1);
   const handleBack = () => setActiveStep((prev) => prev - 1);
   const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
