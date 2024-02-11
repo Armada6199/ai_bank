@@ -1,7 +1,7 @@
 import React from "react";
-import PaymentAgreements from "./PaymentAgreements";
-import PayrollDetails from "./payrollDetails";
-import PayrollSummary from "./PayrollSummary";
+import PaymentAgreements from "../pages/PaymentAgreements";
+import PayrollDetails from "../pages/payrollDetails";
+import PayrollSummary from "../pages/PayrollSummary";
 
 function PayrollHOC({ activeStep }) {
   switch (activeStep) {
@@ -9,7 +9,8 @@ function PayrollHOC({ activeStep }) {
       return <PaymentAgreements />;
     case 1:
       return <PayrollDetails />;
-      case 2: return <PayrollSummary/>
+    case 2:
+      return <PayrollSummary />;
   }
 }
 

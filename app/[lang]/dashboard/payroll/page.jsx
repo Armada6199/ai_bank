@@ -11,11 +11,11 @@ import {
 } from "@mui/material";
 [];
 import React from "react";
-import PaymentAgreements from "../../components/dash/payrollPages/PaymentAgreements";
+import PaymentAgreements from "../../components/dash/payroll/pages/PaymentAgreements";
 import { glassmorphismStyle, stepStyle } from "@styles/styles";
-import PayrollNavigation from "../../components/dash/payrollPages/PayrollNavigation";
+import PayrollNavigation from "../../components/dash/payroll/components/PayrollNavigation";
 import styled from "@emotion/styled";
-import PayrollHOC from "../../components/dash/payrollPages/PayrollHOC";
+import PayrollHOC from "../../components/dash/payroll/components/PayrollHOC";
 export default Payroll;
 
 function Payroll() {
@@ -29,7 +29,6 @@ function Payroll() {
     >
       {/* <PaymentAgreements /> */}
 
-      <PayrollHOC activeStep={activeStep} />
     </Grid>
   );
 }

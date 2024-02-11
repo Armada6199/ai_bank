@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import SideBar from "../components/dash/SideBar";
 import DashManageHeader from "../components/dash/DashManageHeader";
 import RequestsStatusHeading from "../components/dash/RequestsStatusHeading";
-import RequestsTable from "../components/dash/RequestsTable";
+import RequestsTable from "../components/tables/RequestsTable";
 import "@styles/styles.css";
 import getDictionary from "@lib/dictionary";
 import { payrollsData } from "@public/constants";

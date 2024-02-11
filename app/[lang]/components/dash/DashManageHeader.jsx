@@ -2,11 +2,11 @@
 import { Button, Grid, Modal, Typography } from "@mui/material";
 import React, { useState } from "react";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
-import { glassmorphismStyle } from "@styles/styles";
 import AddAcc from "../modals/AddAcc";
-import Payroll from "../modals/Payroll";
+import { useRouter } from "next/navigation";
 
 function DashManageHeader({ headerLocale, activeLink }) {
+  const { push } = useRouter();
   const activeLocale =
     activeLink === "Manage Payroll Request"
       ? headerLocale.managePayroll
@@ -60,7 +60,11 @@ function DashManageHeader({ headerLocale, activeLink }) {
         >
           <Button
             variant="contained"
-            onClick={() => handleOpenAcc()}
+            onClick={() =>
+              activeLink == "Manage Payroll Request"
+                ? push("/dashboard/payroll")
+                : handleOpenAcc()
+            }
             sx={{ borderRadius: "20px", fontWeight: 700 }}
           >
             {activeLocale.buttonText}
@@ -80,11 +84,7 @@ function DashManageHeader({ headerLocale, activeLink }) {
         }}
       >
         <Grid container item xs={10}>
-          {activeLink == "Manage Payroll Request" ? (
-            <Payroll />
-          ) : (
-            <AddAcc activeLocale={activeLocale} />
-          )}
+          <AddAcc activeLocale={activeLocale} />
         </Grid>
       </Modal>
     </Grid>

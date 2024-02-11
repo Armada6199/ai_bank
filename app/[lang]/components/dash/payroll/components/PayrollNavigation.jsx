@@ -1,16 +1,8 @@
 import { Button, Grid } from "@mui/material";
-import React from "react";
 
-function PayrollNavigation({ handleNext,handleBack }) {
+function PayrollNavigation({ handleBack }) {
   return (
-    <Grid
-      container
-      justifyContent={"space-between"}
-      spacing={12}
-      item
-      xs={12}
-      p={4}
-    >
+    <Grid container justifyContent={"space-between"} spacing={12} item xs={12}>
       <Grid item xs={2}>
         <Button onClick={handleBack} fullWidth variant="outlined">
           Back
@@ -23,7 +15,7 @@ function PayrollNavigation({ handleNext,handleBack }) {
           </Button>
         </Grid>
         <Grid item xs={4}>
-          <Button onClick={handleNext} fullWidth variant="contained">
+          <Button type="submit" fullWidth variant="contained">
             Next
           </Button>
         </Grid>

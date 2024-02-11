@@ -1,60 +1,24 @@
-import { Box, Grid, IconButton, Paper, Typography } from "@mui/material";
-import React, { useContext, useState } from "react";
+"use client";
+import { Grid } from "@mui/material";
 import "@styles/styles.css";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import PayrollHeader from "../dash/payrollPages/Header";
-function BulkUpload({}) {
-  console.log("bulk");
+import PayrollHeader from "../dash/payroll/components/Header";
+
+import CustomCSVReader from "../CustomCSVReader";
+function BulkUpload(props) {
+  const { closeBulkModal, setFilteredTableData, setTableData } = props;
+
   return (
-    <Grid container alignItems={"flex-start"} gap={12}>
-      <PayrollHeader title={"Upload Beneficiaries"} />
-      <Grid
-        container
-        alignItems={"flex-start"}
-        justifyContent={{
-          textAlign: { xs: "center", md: "start" },
-          xs: "center",
-        }}
-        item
-        md={6}
-        p={4}
-        spacing={12}
-      >
-        <Grid item md={12}>
-          <Paper
-            variant="outlined"
-            style={{
-              border: true ? "2px dashed secondary.dark" : "2px dashed #C4B28F",
-              padding: 20,
-              textAlign: "center",
-              cursor: "pointer",
-              background: true ? "#fff" : "#fafafa",
-              borderRadius: "20px",
-            }}
-          >
-            <input
-              accept="image/*"
-              style={{ display: "none" }}
-              id="raised-button-file"
-              type="file"
-              multiple
-            />
-            <label htmlFor="raised-button-file">
-              <Box display="flex" flexDirection="column" alignItems="center">
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="span"
-                >
-                  <CloudUploadIcon
-                    sx={{ fontSize: 60, color: "secondary.dark" }}
-                  />
-                </IconButton>
-                <Typography>{1}</Typography>
-                <Typography>{1}</Typography>
-              </Box>
-            </label>
-          </Paper>
+    <Grid container alignItems={"flex-start"} gap={8} justifyContent={"center"}>
+      <PayrollHeader
+        closeBulkModal={closeBulkModal}
+        title={"Upload Beneficiaries"}
+      />
+      <Grid container item justifyContent={"center"} p={4}>
+        <Grid item xs={6}>
+          <CustomCSVReader
+            setFilteredTableData={setFilteredTableData}
+            setTableData={setTableData}
+          />
         </Grid>
       </Grid>
     </Grid>
