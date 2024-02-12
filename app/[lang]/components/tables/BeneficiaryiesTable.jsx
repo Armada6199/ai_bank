@@ -3,8 +3,8 @@ import { Grid, Typography } from "@mui/material";
 import MUIDataTable from "mui-datatables";
 
 import React from "react";
-import "@styles/styles.css";
-import { glassmorphismStyle } from "@styles/styles";
+import "/styles/styles.css";
+import { glassmorphismStyle } from "/styles/styles";
 import CustomTableFooter from "./CustomTableFooter";
 
 function BeneficiaryiesTable({ tableData }) {

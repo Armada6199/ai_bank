@@ -10,12 +10,28 @@ import {
 import MUIDataTable from "mui-datatables";
 
 import React, { useEffect, useState } from "react";
-import "@styles/styles.css";
-import { glassmorphismStyle } from "@styles/styles";
+import "/styles/styles.css";
+import { glassmorphismStyle } from "/styles/styles";
 import CustomTableFooter from "./CustomTableFooter";
-import { payrollsData } from "@public/constants";
+import { payrollsData } from "/public/constants";
+import axios from "axios";
+import { useFormContext } from "react-hook-form";
 
 function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
+  const [payrollData, setPayrollData] = useState([]);
+  const { getValues, register } = useFormContext();
+  let agreenment = getValues("paymentAgreenmentFilter");
+  useEffect(() => {
+    const getPayrollData = async () => {
+      try {
+        const result = await axios.get(`/api/payrolls`);
+        setPayrollData(result.data.payrolls);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getPayrollData();
+  }, []);
   const options = {
     elevation: 0,
     pagination: true,
@@ -39,10 +55,12 @@ function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
               <Grid item xs={4}>
                 <FormControl fullWidth>
                   <Select
-                    defaultValue={"P2342529922"}
+                    {...register("paymentAgreenmentFilter")}
                     labelId="paymentAgreenments"
                     id="paymentAgreenments"
+                    defaultValue={"All"}
                   >
+                    <MenuItem value={"All"}>All</MenuItem>
                     <MenuItem value={"P2342529922"}>P2342529922</MenuItem>
                     <MenuItem value={"E2342529922"}>E2342529922</MenuItem>
                     <MenuItem value={"S234252993332"}>S234252993332</MenuItem>
@@ -95,109 +113,28 @@ function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
     {
       name: "requestId",
       label: "Request Id",
-      options: {
-        filter: false,
-        customBodyRender: (loanTypeObj, tableMeta, updateValue) => (
-          <Grid container alignItems={"center"} gap={2} item>
-            <Typography>12321</Typography>
-          </Grid>
-        ),
-        customHeadLabelRender: (value) => (
-          <Grid item textAlign={"start"}>
-            <Typography variant="body1" fontWeight={600}>
-              Request Id
-            </Typography>
-          </Grid>
-        ),
-      },
     },
     {
       name: "payrollAmount",
       label: "Payroll Amount",
-      options: {
-        filter: true,
-        customBodyRender: (value, tableMeta, updateValue) => (
-          <Grid item>
-            <Typography variant="body1" fontWeight={600}>
-              2000 EGP
-            </Typography>
-          </Grid>
-        ),
-        customHeadLabelRender: (value) => (
-          <Grid item textAlign={"start"}>
-            <Typography variant="body1" fontWeight={600}>
-              Payroll Amount
-            </Typography>
-          </Grid>
-        ),
-      },
     },
     {
       name: "fundingAccount",
       label: "Funding Amount",
-      options: {
-        filter: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return (
-            <Grid item>
-              <Typography variant="body1" fontWeight={600}>
-                {value}
-              </Typography>
-            </Grid>
-          );
-        },
-        customHeadLabelRender: (value) => (
-          <Grid item textAlign={"start"}>
-            <Typography variant="body1" fontWeight={600}>
-              Funding Amount
-            </Typography>
-          </Grid>
-        ),
-      },
     },
     {
       name: "proccessPayrollOn",
       label: "Proccess Payroll On ",
-      options: {
-        filter: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return <Grid item>{value}</Grid>;
-        },
-        customHeadLabelRender: (value) => (
-          <Grid item textAlign={"start"}>
-            <Typography variant="body1" fontWeight={600}>
-              Proccess Payroll On
-            </Typography>
-          </Grid>
-        ),
-      },
     },
     {
       name: "status",
       label: "Status",
-      options: {
-        filter: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return (
-            <Grid item>
-              <Typography>{value}</Typography>
-            </Grid>
-          );
-        },
-        customHeadLabelRender: (value) => (
-          <Grid item textAlign={"start"}>
-            <Typography variant="body1" fontWeight={600}>
-              Status
-            </Typography>
-          </Grid>
-        ),
-      },
     },
   ];
 
   return (
     <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4}>
-      <MUIDataTable data={tableData} columns={columns} options={options} />
+      <MUIDataTable data={payrollData} columns={columns} options={options} />
     </Grid>
   );
 }

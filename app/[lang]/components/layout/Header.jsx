@@ -14,7 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Image from "next/image";
-import bankLogo from "@public/assets/Screenshot_2024-02-05_172409-removebg-preview.png";
+import bankLogo from "/public/assets/bankLogo.png";
 import { Grid } from "@mui/material";
 import Person2Icon from "@mui/icons-material/Person2";
 import TranslateIcon from "@mui/icons-material/Translate";

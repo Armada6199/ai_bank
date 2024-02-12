@@ -1,5 +1,5 @@
 "use client";
-import getDictionary from "@lib/dictionary";
+import getDictionary from "/lib/dictionary";
 
 const { createContext, useState, useEffect } = require("react");
 
@@ -9,7 +9,7 @@ const DictionaryProvider = ({ children, lang }) => {
   useEffect(() => {
     const getPage = async () => {
       const localeContent = await getDictionary(lang);
-      console.log('run'.repeat(200))
+      console.log("run".repeat(200));
       setDictionaryContent(localeContent);
     };
     getPage();

@@ -1,12 +1,12 @@
 "use client";
 import { Box, Grid, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import bankLogoTransparent from "@public/assets/Screenshot_2024-02-05_172409-removebg-preview.png";
+import bankLogoTransparent from "/public/assets/banklogo.png";
 import LoginForm from "../components/LoginForm";
-import logoClipped from "@public/assets/logo1.png";
-import "@styles/styles.css";
+import logoClipped from "/public/assets/bankShaped.png";
+import "/styles/styles.css";
 import Image from "next/image";
-import { dictionaryContext } from "@hooks/DictionaryProvider";
+import { dictionaryContext } from "/hooks/DictionaryProvider";
 function page({ params: props }) {
   const { dictionaryContent } = useContext(dictionaryContext);
   return (

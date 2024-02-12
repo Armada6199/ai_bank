@@ -9,7 +9,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { glassmorphismStyle } from "@styles/styles";
+import { glassmorphismStyle } from "/styles/styles";
 import React from "react";
 import CustomDatePicker from "../../../CustomDatePicker";
 import BulkUpload from "../../../modals/BulkUpload";

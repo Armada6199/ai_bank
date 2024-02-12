@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 
 function DashboardLayout({ children, params: props }) {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <Grid container maxHeight={"100vh"}>
       {pathname == `/${props.lang}/dashboard` && <Header />}

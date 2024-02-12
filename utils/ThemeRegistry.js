@@ -4,7 +4,7 @@ import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "@styles/theme";
+import theme from "/styles/theme";
 import { appWithTranslation } from "next-i18next";
 
 import rtlPlugin from "stylis-plugin-rtl";

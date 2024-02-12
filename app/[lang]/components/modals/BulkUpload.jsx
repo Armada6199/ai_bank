@@ -1,6 +1,6 @@
 "use client";
 import { Grid } from "@mui/material";
-import "@styles/styles.css";
+import "/styles/styles.css";
 import PayrollHeader from "../dash/payroll/components/Header";
 
 import CustomCSVReader from "../CustomCSVReader";

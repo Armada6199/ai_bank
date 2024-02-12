@@ -1,5 +1,5 @@
 import React from "react";
-import "@styles/styles.css";
+import "/styles/styles.css";
 import { Box, Pagination } from "@mui/material";
 const CustomTableFooter = (props) => {
   const { count, rowsPerPage, page, changePage, changeRowsPerPage } = props;

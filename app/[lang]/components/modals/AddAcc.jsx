@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { glassmorphismStyle } from "@styles/styles";
+import { glassmorphismStyle } from "/styles/styles";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 function AddAcc({ activeLocale }) {

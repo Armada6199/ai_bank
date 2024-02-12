@@ -1,7 +1,7 @@
 "use client";
 import { Button, Grid } from "@mui/material";
 import React from "react";
-import "@styles/styles.css";
+import "/styles/styles.css";
 
 function DetailsFilterHeader({ activeFilter, setActiveFilter }) {
   return (

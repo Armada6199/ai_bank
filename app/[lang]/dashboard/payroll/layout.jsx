@@ -1,6 +1,6 @@
 "use client";
-import PayrollHOC from "@app/[lang]/components/dash/payroll/components/PayrollHOC";
-import PayrollNavigation from "@app/[lang]/components/dash/payroll/components/PayrollNavigation";
+import PayrollHOC from "/app/[lang]/components/dash/payroll/components/PayrollHOC";
+import PayrollNavigation from "/app/[lang]/components/dash/payroll/components/PayrollNavigation";
 import styled from "@emotion/styled";
 import DoneIcon from "@mui/icons-material/Done";
 import {
@@ -15,7 +15,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React from "react";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 35,
@@ -79,13 +79,7 @@ function ColorlibStepIcon(props) {
 function layout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = ["Select Payment Agreements", "Payroll Details ", "Summary"];
-  const methods = useForm({
-    defaultValues: {
-      paymentAgreenment: null,
-      totalPayrollAmount: 0,
-      totalPayrollRecords: 0,
-    },
-  });
+
   const { handleSubmit } = methods;
   const handleNext = (formData) => {
     if (activeStep < 2) setActiveStep((prev) => prev + 1);
@@ -126,36 +120,34 @@ function layout() {
           ))}
         </Stepper>
       </Grid>
-      <FormProvider {...methods}>
-        <form
-          noValidate
-          style={{ width: "100%" }}
-          onSubmit={handleSubmit((formData) => handleNext(formData))}
+      <form
+        noValidate
+        style={{ width: "100%" }}
+        onSubmit={handleSubmit((formData) => handleNext(formData))}
+      >
+        <Grid container item sx={{ minHeight: "calc(100vh - 200px)" }}>
+          <PayrollHOC activeStep={activeStep} />
+        </Grid>
+        <Box
+          sx={{
+            backgroundColor: "#fff",
+            transition: "all ease-in-out 1s",
+            zIndex: "99",
+          }}
+          p={4}
+          mt={isMobile ? "100px" : "0"}
+          position={"sticky"}
+          bottom={"0px"}
+          maxHeight={"100px"}
         >
-          <Grid container item sx={{ minHeight: "calc(100vh - 200px)" }}>
-            <PayrollHOC activeStep={activeStep} />
+          <Grid container item md={12}>
+            <PayrollNavigation
+              handleNext={handleNext}
+              handleBack={handleBack}
+            />
           </Grid>
-          <Box
-            sx={{
-              backgroundColor: "#fff",
-              transition: "all ease-in-out 1s",
-              zIndex: "99",
-            }}
-            p={4}
-            mt={isMobile ? "100px" : "0"}
-            position={"sticky"}
-            bottom={"0px"}
-            maxHeight={"100px"}
-          >
-            <Grid container item md={12}>
-              <PayrollNavigation
-                handleNext={handleNext}
-                handleBack={handleBack}
-              />
-            </Grid>
-          </Box>
-        </form>
-      </FormProvider>
+        </Box>
+      </form>
     </Grid>
   );
 }

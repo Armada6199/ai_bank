@@ -1,10 +1,10 @@
 "use client";
-import { dictionaryContext } from "@hooks/DictionaryProvider";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { dictionaryContext } from "../../../hooks/DictionaryProvider";
 
 function LoginForm() {
   const {
@@ -13,7 +13,7 @@ function LoginForm() {
     handleSubmit,
   } = useForm();
   const { push } = useRouter();
-  const {dictionaryContent } = useContext(dictionaryContext);
+  const { dictionaryContent } = useContext(dictionaryContext);
   async function handleLogin(formData) {
     try {
       const loginResponse = await signIn("credentials", {

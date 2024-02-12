@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import bankLogoShaped from "@public/assets/logo1.png";
+import bankLogoShaped from "/public/assets/bankShaped.png";
 import Image from "next/image";
 
 function SideBar({ activeLink, setActiveLink }) {

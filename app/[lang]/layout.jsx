@@ -1,7 +1,7 @@
 import React from "react";
 import Providers from "./components/Providers";
 import { i18n } from "../../i18.config";
-import "@styles/styles.css";
+import "/styles/styles.css";
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }

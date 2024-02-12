@@ -1,6 +1,6 @@
 import React from "react";
-import TranslationWrapper from "@utils/ThemeRegistry";
-import DictionaryProvider from "@hooks/DictionaryProvider";
+import TranslationWrapper from "/utils/ThemeRegistry";
+import DictionaryProvider from "/hooks/DictionaryProvider";
 
 function Providers({ children, lang }) {
   return (
