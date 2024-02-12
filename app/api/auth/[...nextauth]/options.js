@@ -1,4 +1,4 @@
-import { authenticateUser } from "@app/api/ldap";
+import { authenticateUser } from "/app/api/ldap";
 import CredentialsProvider from "next-auth/providers/credentials";
 const ldap = require("ldapjs");
 export const options = {

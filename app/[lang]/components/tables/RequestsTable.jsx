@@ -17,21 +17,53 @@ import { payrollsData } from "/public/constants";
 import axios from "axios";
 import { useFormContext } from "react-hook-form";
 
-function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
+function RequestsTable({ activeStatus, activeLink }) {
   const [payrollData, setPayrollData] = useState([]);
   const { getValues, register } = useFormContext();
+  const [filteredPayrolls, setFilteredPayrolls] = useState(payrollData);
+  const [agreements, setAgreements] = useState([]);
   let agreenment = getValues("paymentAgreenmentFilter");
   useEffect(() => {
-    const getPayrollData = async () => {
+    // const getPayrollData = async () => {
+    //   try {
+    //     const result = await axios.get(`/api/payrolls`);
+    // setPayrollData(result.data.payrolls);
+    // setFilteredPayrolls(result.data.payrolls);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    const getAgreements = async () => {
       try {
-        const result = await axios.get(`/api/payrolls`);
-        setPayrollData(result.data.payrolls);
+        const result = await axios.get(`/api/agreements`);
+        setAgreements(result.data.agreements);
+        const payrolls = [];
+        result.data.agreements.map((e) => {
+          e.payrolls.map((payroll) => payrolls.push(payroll));
+        });
+        setPayrollData(payrolls);
+        setFilteredPayrolls(payrolls);
       } catch (error) {
         console.log(error);
       }
     };
-    getPayrollData();
+    getAgreements();
+    // getPayrollData();
   }, []);
+  async function handleGetAgreenmentPayrolls() {
+    try {
+      if (agreenment == "All") {
+        setFilteredPayrolls(payrollData);
+      } else {
+        const result = await axios.get(
+          `/api/payrolls?agreementId=${agreenment}`
+        );
+        setFilteredPayrolls(result.data.payrolls);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const options = {
     elevation: 0,
     pagination: true,
@@ -61,14 +93,20 @@ function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
                     defaultValue={"All"}
                   >
                     <MenuItem value={"All"}>All</MenuItem>
-                    <MenuItem value={"P2342529922"}>P2342529922</MenuItem>
-                    <MenuItem value={"E2342529922"}>E2342529922</MenuItem>
-                    <MenuItem value={"S234252993332"}>S234252993332</MenuItem>
+                    {agreements.map((agreement) => (
+                      <MenuItem value={agreement.agreementId}>
+                        {agreement.agreementId}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Grid>
               <Grid item xs={4}>
-                <Button fullWidth variant="contained">
+                <Button
+                  onClick={() => handleGetAgreenmentPayrolls()}
+                  fullWidth
+                  variant="contained"
+                >
                   Search
                 </Button>
               </Grid>
@@ -97,18 +135,18 @@ function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
       );
     },
   };
-  useEffect(() => {
-    if (activeStatus !== "All Requests") {
-      const newTableData = payrollsData.filter(
-        (e) =>
-          (e[4] === "Waiting Debit Date" && activeStatus === "Pending") ||
-          (e[4] === "Not Submitted" && activeStatus === "Rejected")
-      );
-      setTableData(newTableData);
-    } else {
-      setTableData(payrollsData);
-    }
-  }, [activeStatus]);
+  // useEffect(() => {
+  //   if (activeStatus !== "All Requests") {
+  //     const newTableData = payrollsData.filter(
+  //       (e) =>
+  //         (e[4] === "Waiting Debit Date" && activeStatus === "Pending") ||
+  //         (e[4] === "Not Submitted" && activeStatus === "Rejected")
+  //     );
+  //     setTableData(newTableData);
+  //   } else {
+  //     setTableData(payrollsData);
+  //   }
+  // }, [activeStatus]);
   const columns = [
     {
       name: "requestId",
@@ -134,7 +172,11 @@ function RequestsTable({ activeStatus, activeLink, tableData, setTableData }) {
 
   return (
     <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4}>
-      <MUIDataTable data={payrollData} columns={columns} options={options} />
+      <MUIDataTable
+        data={filteredPayrolls}
+        columns={columns}
+        options={options}
+      />
     </Grid>
   );
 }

@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { getAllPayrolls } from "../../models/payroll";
-export async function GET() {
+export async function GET(req) {
   try {
     const params = req.nextUrl.searchParams;
-    const agreenmentQuery = params.get("agreenmentId");
-    const { payrolls, error } = await getAllPayrolls(agreenmentQuery);
+    const agreementQuery = params.get("agreementId");
+    const { payrolls, error } = await getAllPayrolls(agreementQuery);
     if (error) throw new Error(error);
     return NextResponse.json({ payrolls: payrolls }, { status: 200 });
   } catch (error) {

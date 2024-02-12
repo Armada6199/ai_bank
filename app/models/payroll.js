@@ -18,9 +18,9 @@ const Payroll =
 
 export async function getAllPayrolls(agreenmentId) {
   try {
-    console.log(Payroll);
     if (agreenmentId) {
       const results = await Payroll.find({ agreenmentId: agreenmentId });
+      console.log(results);
       return { payrolls: results, error: null };
     } else {
       const results = await Payroll.find({});
@@ -31,3 +31,4 @@ export async function getAllPayrolls(agreenmentId) {
     return { error: "Failed To Fetch Payrolls" };
   }
 }
+export default Payroll;
