@@ -38,6 +38,8 @@ function SideBar({ activeLink, setActiveLink }) {
               borderColor: "primary.main",
               height: "80px",
               width: "80px",
+              maxHeight: "80px",
+              maxWidth: "80px",
               borderRadius: "50%",
               boxShadow: " 0px 7px 6px -3px rgba(112,95,112,1)",
             }}

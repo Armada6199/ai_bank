@@ -10,8 +10,10 @@ export default function CustomDatePicker({ title, disabled, value }) {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer sx={{ padding: 0, margin: 0 }} components={["DatePicker"]}>
         <DatePicker
-          //   defaultValue={dayjs(value)}
+          defaultValue={dayjs(new Date())}
           //   disabled={disabled}
+          sx={{ height: "40px" }}
+          slotProps={{ textField: { size: "small" } }}
           label={title}
         />
       </DemoContainer>

@@ -42,3 +42,16 @@ body {
   margin-bottom: 2em;
   padding: 0;
 }
+.payroll_modal::-webkit-scrollbar {
+  width: 20px;
+}
+.payroll_modal::-webkit-scrollbar-thumb {
+  background-color: #4caf50;
+  border-radius: 6px;
+}
+
+/* For Firefox */
+.payroll_modal {
+  scrollbar-width: thin;
+  scrollbar-color: #96c11f #f0f0f0;
+}

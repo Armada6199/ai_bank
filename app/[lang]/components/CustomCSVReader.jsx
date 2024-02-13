@@ -1,13 +1,14 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Box, IconButton, Typography } from "@mui/material";
 import { handlePayrollCalculation } from "/utils/calculatePayroll";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import {
   formatFileSize,
   lightenDarkenColor,
   useCSVReader,
 } from "react-papaparse";
+import { agreementContext } from "@/hooks/AgreementProvider";
 
 const GREY = "#CCC";
 const GREY_LIGHT = "rgba(255, 255, 255, 0.4)";
@@ -88,7 +89,8 @@ export default function CSVReader({ setTableData, setFilteredTableData }) {
   const [zoneHover, setZoneHover] = useState(false);
   const [finishedUploading, setFinishedUploading] = useState(false);
   const { setValue, getValues } = useFormContext();
-
+  const { setFilteredBenficaries, setBeneficaries } =
+    useContext(agreementContext);
   const [removeHoverColor, setRemoveHoverColor] = useState(
     DEFAULT_REMOVE_HOVER_COLOR
   );
@@ -99,9 +101,9 @@ export default function CSVReader({ setTableData, setFilteredTableData }) {
         // console.log(results, "data");
         setFinishedUploading(true);
         handlePayrollCalculation(
-          results.data.slice(1),
-          setTableData,
-          setFilteredTableData,
+          results.data.slice(1, results.data.length - 1),
+          setBeneficaries,
+          setFilteredBenficaries,
           setValue,
           getValues
         );

@@ -7,7 +7,7 @@ import RequestsStatusHeading from "../components/dash/RequestsStatusHeading";
 import RequestsTable from "../components/tables/RequestsTable";
 import "/styles/styles.css";
 import getDictionary from "/lib/dictionary";
-import { FormProvider, useForm } from "react-hook-form";
+import AccountsTable from "../components/tables/AccountsTable";
 function page({ params: props }) {
   const [activeLink, setActiveLink] = useState("Manage Payroll Request");
   const [localeContent, setLocaleContent] = useState();
@@ -21,64 +21,56 @@ function page({ params: props }) {
     };
     getLocale();
   }, []);
-  const methods = useForm({
-    defaultValues: {
-      paymentAgreenment: null,
-      totalPayrollAmount: 0,
-      totalPayrollRecords: 0,
-      paymentAgreenmentFilter: "All",
-    },
-  });
+
   return (
     localeContent && (
-      <FormProvider {...methods}>
-        <Grid container item xs={12}>
-          <Grid
-            container
-            item
-            position={"sticky"}
-            top={50}
-            sx={{ height: "calc(100vh - 60px)" }}
-            xs={12}
-            md={3}
-            xl={2}
-          >
-            <SideBar
-              sidebarLocale={localeContent.dashSidebar}
-              activeLink={activeLink}
-              setActiveLink={setActiveLink}
-            />
-          </Grid>
-          <Grid
-            container
-            item
-            bgcolor={"background.default"}
-            gap={4}
-            p={4}
-            xs={12}
-            md={9}
-            xl={10}
-          >
-            <DashManageHeader
-              activeLink={activeLink}
-              headerLocale={localeContent.dashHeader}
-            />
+      <Grid
+        container
+        item
+        alignItems={"flex-start"}
+        sx={{ minHeight: "calc(100vh - 80px)" }}
+        xs={12}
+      >
+        <Grid container item position={"sticky"} top={50} xs={12} md={3} xl={2}>
+          <SideBar
+            sidebarLocale={localeContent.dashSidebar}
+            activeLink={activeLink}
+            setActiveLink={setActiveLink}
+          />
+        </Grid>
+        <Grid
+          container
+          item
+          bgcolor={"background.default"}
+          gap={4}
+          p={4}
+          xs={12}
+          md={9}
+          xl={10}
+        >
+          <DashManageHeader
+            activeLink={activeLink}
+            headerLocale={localeContent.dashHeader}
+          />
 
-            {activeLink !== "Manage Accounts" && (
-              <RequestsStatusHeading
-                setActiveStatus={setActiveStatus}
-                activeStatus={activeStatus}
-              />
-            )}
+          {activeLink !== "Manage Accounts" && (
+            <RequestsStatusHeading
+              setActiveStatus={setActiveStatus}
+              activeStatus={activeStatus}
+            />
+          )}
+          {activeLink == "Manage Accounts" ? (
+            <AccountsTable />
+          ) : (
             <RequestsTable
               setTableData={setTableData}
               tableData={tableData}
               activeLink={activeLink}
               activeStatus={activeStatus}
             />
-          </Grid>
+          )}
         </Grid>
-      </FormProvider>
+      </Grid>
     )
   );
 }

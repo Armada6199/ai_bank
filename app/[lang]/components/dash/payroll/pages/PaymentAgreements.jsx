@@ -6,12 +6,13 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useFormContext } from "react-hook-form";
+import { agreementContext } from "../../../../../../hooks/AgreementProvider";
 
 function PaymentAgreements({}) {
   const { register } = useFormContext();
-
+  const { agreements } = useContext(agreementContext);
   return (
     <Grid container item xs={12} p={4} alignItems={"flex-start"}>
       <Grid container item gap={4} xs={12}>
@@ -25,9 +26,11 @@ function PaymentAgreements({}) {
             })}
             label="Payment Agreements"
           >
-            <MenuItem value={"P3771717463423"}>P3771717463423</MenuItem>
-            <MenuItem value={"E3771717463423"}>E3771717463423</MenuItem>
-            <MenuItem value={"F3771717463423"}>F3771717463423</MenuItem>
+            {agreements.map((agreement) => (
+              <MenuItem value={agreement.agreementId}>
+                {agreement.agreementId}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Grid>

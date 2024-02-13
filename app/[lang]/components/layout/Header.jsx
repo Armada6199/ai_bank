@@ -56,14 +56,21 @@ function DrawerAppBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Grid container item xs={12} borderBottom={"1px solid"} maxHeight={"60px"}>
+    <Grid
+      container
+      item
+      xs={12}
+      sx={{
+        borderBottom: "1px solid ",
+        borderColor: "primary.main",
+        bgcolor: "#fff",
+      }}
+      maxHeight={"80px"}
+    >
       <AppBar
         component="nav"
         sx={{
           bgcolor: "#fff",
-          maxHeight: "60px",
-          borderBottom: "1px solid ",
-          borderColor: "primary.main",
           boxShadow: "none",
         }}
       >

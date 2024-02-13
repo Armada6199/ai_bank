@@ -8,62 +8,22 @@ import {
   Typography,
 } from "@mui/material";
 import MUIDataTable from "mui-datatables";
-
-import React, { useEffect, useState } from "react";
+import { filterPayrolls, handleFilterStatus } from "/utils/apiRequests";
+import React, { useContext, useEffect } from "react";
 import "/styles/styles.css";
 import { glassmorphismStyle } from "/styles/styles";
 import CustomTableFooter from "./CustomTableFooter";
-import { payrollsData } from "/public/constants";
-import axios from "axios";
 import { useFormContext } from "react-hook-form";
-
+import { agreementContext } from "/hooks/AgreementProvider.js";
 function RequestsTable({ activeStatus, activeLink }) {
-  const [payrollData, setPayrollData] = useState([]);
   const { getValues, register } = useFormContext();
-  const [filteredPayrolls, setFilteredPayrolls] = useState(payrollData);
-  const [agreements, setAgreements] = useState([]);
   let agreenment = getValues("paymentAgreenmentFilter");
+  const { setFilteredPayrolls, agreements, filteredPayrolls } =
+    useContext(agreementContext);
+  console.log(filteredPayrolls);
   useEffect(() => {
-    // const getPayrollData = async () => {
-    //   try {
-    //     const result = await axios.get(`/api/payrolls`);
-    // setPayrollData(result.data.payrolls);
-    // setFilteredPayrolls(result.data.payrolls);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    const getAgreements = async () => {
-      try {
-        const result = await axios.get(`/api/agreements`);
-        setAgreements(result.data.agreements);
-        const payrolls = [];
-        result.data.agreements.map((e) => {
-          e.payrolls.map((payroll) => payrolls.push(payroll));
-        });
-        setPayrollData(payrolls);
-        setFilteredPayrolls(payrolls);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAgreements();
-    // getPayrollData();
-  }, []);
-  async function handleGetAgreenmentPayrolls() {
-    try {
-      if (agreenment == "All") {
-        setFilteredPayrolls(payrollData);
-      } else {
-        const result = await axios.get(
-          `/api/payrolls?agreementId=${agreenment}`
-        );
-        setFilteredPayrolls(result.data.payrolls);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+    handleFilterStatus(activeStatus, agreements, setFilteredPayrolls);
+  }, [activeStatus]);
   const options = {
     elevation: 0,
     pagination: true,
@@ -103,7 +63,9 @@ function RequestsTable({ activeStatus, activeLink }) {
               </Grid>
               <Grid item xs={4}>
                 <Button
-                  onClick={() => handleGetAgreenmentPayrolls()}
+                  onClick={() =>
+                    filterPayrolls(agreements, setFilteredPayrolls, agreenment)
+                  }
                   fullWidth
                   variant="contained"
                 >
@@ -161,7 +123,7 @@ function RequestsTable({ activeStatus, activeLink }) {
       label: "Funding Amount",
     },
     {
-      name: "proccessPayrollOn",
+      name: "processPayrollOn",
       label: "Proccess Payroll On ",
     },
     {

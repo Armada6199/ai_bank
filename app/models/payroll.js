@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+// console.log(mongoose.connect, "ffff");
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.promise = global.Promise;
 const payrollSchema = new Schema(

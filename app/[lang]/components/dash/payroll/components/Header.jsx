@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 import ClearIcon from "@mui/icons-material/Clear";
-function PayrollHeader({ title, closeBulkModal }) {
+function PayrollHeader({ title, closeModal }) {
   return (
     <Grid
       container
@@ -23,7 +23,7 @@ function PayrollHeader({ title, closeBulkModal }) {
       </Grid>
       <Grid container justifyContent={"flex-end"} item xs={2}>
         <ClearIcon
-          onClick={() => closeBulkModal()}
+          onClick={() => closeModal()}
           sx={{ cursor: "pointer", fontSize: 32, color: "secondary.main" }}
         />
       </Grid>

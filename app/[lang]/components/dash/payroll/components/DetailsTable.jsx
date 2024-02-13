@@ -10,16 +10,21 @@ import {
   Typography,
 } from "@mui/material";
 import { glassmorphismStyle } from "/styles/styles";
-import React from "react";
+import React, { useContext } from "react";
 import CustomDatePicker from "../../../CustomDatePicker";
 import BulkUpload from "../../../modals/BulkUpload";
 import { useFormContext } from "react-hook-form";
-function DetailsTable({ setFilteredTableData, filteredTableData,setTableData }) {
+import { agreementContext } from "@/hooks/AgreementProvider";
+import AddBeneficiary from "../../../modals/AddBeneficary";
+function DetailsTable({}) {
   const [openBulk, setOpenBulk] = React.useState(false);
   const openBulkModal = () => setOpenBulk(true);
   const closeBulkModal = () => setOpenBulk(false);
-  const { register,getValues } = useFormContext();
-  
+  const [openAddBeneficiary, setOpenAddBeneficiary] = React.useState(false);
+  const openAddBeneficiaryModal = () => setOpenAddBeneficiary(true);
+  const closeAddBeneficiaryModal = () => setOpenAddBeneficiary(false);
+  const { register, getValues } = useFormContext();
+  const { accounts } = useContext(agreementContext);
   return (
     <Grid container item gap={4}>
       <Grid container item>
@@ -38,7 +43,11 @@ function DetailsTable({ setFilteredTableData, filteredTableData,setTableData }) 
             </Button>
           </Grid>
           <Grid item xs={4}>
-            <Button fullWidth variant="contained">
+            <Button
+              onClick={openAddBeneficiaryModal}
+              fullWidth
+              variant="contained"
+            >
               Add Beneficiary
             </Button>
           </Grid>
@@ -59,7 +68,7 @@ function DetailsTable({ setFilteredTableData, filteredTableData,setTableData }) 
             </Grid>
             <Grid item xs={6}>
               <Typography variant="body1" fontWeight={600}>
-                {getValues('totalPayrollAmount')}
+                {getValues("totalPayrollAmount")}
               </Typography>
             </Grid>
           </Grid>
@@ -69,7 +78,7 @@ function DetailsTable({ setFilteredTableData, filteredTableData,setTableData }) 
             </Grid>
             <Grid item xs={6}>
               <Typography variant="body1" fontWeight={600}>
-                PAY2058
+                {getValues("paymentAgreement")}
               </Typography>
             </Grid>
           </Grid>
@@ -81,7 +90,7 @@ function DetailsTable({ setFilteredTableData, filteredTableData,setTableData }) 
             </Grid>
             <Grid item xs={6}>
               <Typography variant="body1" fontWeight={600}>
-              {getValues('totalPayrollRecords')}
+                {getValues("totalPayrollRecords")}
               </Typography>
             </Grid>
           </Grid>
@@ -91,7 +100,7 @@ function DetailsTable({ setFilteredTableData, filteredTableData,setTableData }) 
             </Grid>
             <Grid item xs={6}>
               <Typography variant="body1" fontWeight={600}>
-                205548667
+                {getValues("fileId")}
               </Typography>
             </Grid>
           </Grid>
@@ -112,12 +121,12 @@ function DetailsTable({ setFilteredTableData, filteredTableData,setTableData }) 
             <Grid item xs={4}>
               <FormControl fullWidth>
                 <Select
-                  sx={{ height: "35px" }}
+                  sx={{ height: "40px" }}
                   {...register("funding", { required: "Choose Funding" })}
                 >
-                  <MenuItem value={10}>P3771717463423</MenuItem>
-                  <MenuItem value={20}>E3771717463423</MenuItem>
-                  <MenuItem value={30}>F3771717463423</MenuItem>
+                  {accounts.map((acc) => (
+                    <MenuItem value={acc.accountID}>{acc.accountID}</MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -134,12 +143,20 @@ function DetailsTable({ setFilteredTableData, filteredTableData,setTableData }) 
         }}
       >
         <Grid container item xs={8} sx={glassmorphismStyle}>
-          <BulkUpload
-            closeBulkModal={closeBulkModal}
-            setFilteredTableData={setFilteredTableData}
-            filteredTableData={filteredTableData}
-            setTableData={setTableData}
-          />
+          <BulkUpload closeBulkModal={closeBulkModal} />
+        </Grid>
+      </Modal>
+      <Modal
+        open={openAddBeneficiary}
+        onClose={closeAddBeneficiaryModal}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Grid container item xs={8} sx={glassmorphismStyle}>
+          <AddBeneficiary closeAddBeneficiaryModal={closeAddBeneficiaryModal} />
         </Grid>
       </Modal>
     </Grid>
