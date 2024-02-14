@@ -22,10 +22,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import EmailIcon from "@mui/icons-material/Email";
 const drawerWidth = 240;
 const navItems = [
-  <Person2Icon sx={{ fontSize: 24, color: "primary.dark" }} />,
-  <TranslateIcon sx={{ fontSize: 24, color: "primary.dark" }} />,
-  <NotificationsIcon sx={{ fontSize: 24, color: "primary.dark" }} />,
-  <EmailIcon sx={{ fontSize: 24, color: "primary.dark" }} />,
+  <Person2Icon sx={{ fontSize: 20, color: "primary.dark" }} />,
+  <TranslateIcon sx={{ fontSize: 20, color: "primary.dark" }} />,
+  <NotificationsIcon sx={{ fontSize: 20, color: "primary.dark" }} />,
+  <EmailIcon sx={{ fontSize: 20, color: "primary.dark" }} />,
 ];
 
 function DrawerAppBar(props) {
@@ -38,7 +38,7 @@ function DrawerAppBar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Image src={bankLogo} />
+      <Image src={bankLogo} priority />
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -60,42 +60,48 @@ function DrawerAppBar(props) {
       container
       item
       xs={12}
-      sx={{
-        borderBottom: "1px solid ",
-        borderColor: "primary.main",
-        bgcolor: "#fff",
-      }}
-      maxHeight={"80px"}
+      alignItems={"center"}
+      borderBottom={"1px solid"}
+      borderColor={"primary.main"}
+      height={"80px"}
+      px={4}
+      bgcolor={"#FFFFFF"}
     >
-      <AppBar
-        component="nav"
-        sx={{
-          bgcolor: "#fff",
-          boxShadow: "none",
-        }}
+      <IconButton
+        edge="start"
+        onClick={handleDrawerToggle}
+        sx={{ mr: 2, display: { sm: "none" } }}
       >
-        <Toolbar>
-          <IconButton
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+        <MenuIcon />
+      </IconButton>
+      <Grid item md={2}>
+        <Image src={bankLogo} style={{ width: "90%", height: "50px" }} />
+      </Grid>
+      <Grid
+        container
+        item
+        gap={4}
+        height={"100%"}
+        alignItems={"center"}
+        justifyContent={"flex-end"}
+        md={10}
+      >
+        {navItems.map((item) => (
+          <Grid
+            container
+            justifyContent={"center"}
+            alignItems={"center"}
+            item
+            bgcolor={"#F7FAED"}
+            sx={{ cursor: "pointer" }}
+            width={"36px"}
+            height={"36px"}
+            borderRadius={"5px"}
           >
-            <MenuIcon />
-          </IconButton>
-          <Grid item md={2}>
-            <Image src={bankLogo} style={{ width: "100%", height: "60px" }} />
+            {item}
           </Grid>
-          <Grid container item gap={4} justifyContent={"flex-end"} md={10}>
-            {navItems.map((item) => (
-              <Grid item bgcolor={"#F7FAED"} borderRadius={"5px"}>
-                <Button key={item} sx={{ color: "#fff" }}>
-                  {item}
-                </Button>
-              </Grid>
-            ))}
-          </Grid>
-        </Toolbar>
-      </AppBar>
+        ))}
+      </Grid>
       <nav>
         <Drawer
           container={container}

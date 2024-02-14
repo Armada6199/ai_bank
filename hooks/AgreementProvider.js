@@ -19,6 +19,7 @@ const AgreementProvider = ({ children, lang }) => {
     handleFetchAccounts(setAccounts);
     handleGetAllAgreements(setPayrollData, setFilteredPayrolls, setAgreements);
   }, []);
+
   return (
     <agreementContext.Provider
       value={{

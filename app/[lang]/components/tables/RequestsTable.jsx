@@ -20,7 +20,6 @@ function RequestsTable({ activeStatus, activeLink }) {
   let agreenment = getValues("paymentAgreenmentFilter");
   const { setFilteredPayrolls, agreements, filteredPayrolls } =
     useContext(agreementContext);
-  console.log(filteredPayrolls);
   useEffect(() => {
     handleFilterStatus(activeStatus, agreements, setFilteredPayrolls);
   }, [activeStatus]);
@@ -51,6 +50,7 @@ function RequestsTable({ activeStatus, activeLink }) {
                     labelId="paymentAgreenments"
                     id="paymentAgreenments"
                     defaultValue={"All"}
+                    sx={{ textAlign: "start" }}
                   >
                     <MenuItem value={"All"}>All</MenuItem>
                     {agreements.map((agreement) => (
@@ -133,7 +133,16 @@ function RequestsTable({ activeStatus, activeLink }) {
   ];
 
   return (
-    <Grid container sx={glassmorphismStyle} item xs={12} gap={4} p={4}>
+    <Grid
+      container
+      sx={glassmorphismStyle}
+      id={"payrollsTable"}
+      item
+      xs={12}
+      gap={4}
+      p={4}
+      minHeight={"60vh"}
+    >
       <MUIDataTable
         data={filteredPayrolls}
         columns={columns}

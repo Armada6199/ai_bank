@@ -21,6 +21,7 @@ function DetailsFilterHeader({ activeFilter, setActiveFilter }) {
       <Grid item>
         <Button
           fullWidth
+          sx={{ transition: "all .2s ease-in" }}
           onClick={() => setActiveFilter("All Beneficiary")}
           variant={activeFilter == "All Beneficiary" ? "contained" : "text"}
         >
@@ -30,6 +31,7 @@ function DetailsFilterHeader({ activeFilter, setActiveFilter }) {
       <Grid item>
         <Button
           fullWidth
+          sx={{ transition: "all .2s ease-in" }}
           onClick={() => setActiveFilter("Error Beneficiary")}
           variant={activeFilter == "Error Beneficiary" ? "contained" : "text"}
         >

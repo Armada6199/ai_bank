@@ -113,6 +113,7 @@ function PayrollModal({ handleClosePayroll }) {
             <PayrollNavigation
               handleNext={handleNext}
               handleBack={handleBack}
+              activeStep={activeStep}
             />
           </Grid>
         </Box>

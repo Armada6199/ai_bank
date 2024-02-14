@@ -20,11 +20,17 @@ function RequestsStatusHeading({ activeStatus, setActiveStatus }) {
       }}
     >
       {status.map((stat) => (
-        <Grid item sx={{ bgcolor: activeStatus == stat ? "primary.main" : "" }}>
+        <Grid item>
           <Button
             variant={activeStatus === stat ? "contained" : "text"}
             onClick={() => setActiveStatus(stat)}
-            sx={{ color: "secondary.main", fontWeight: 700 }}
+            sx={{
+              color: "secondary.main",
+              bgcolor: activeStatus == stat ? "primary.main" : "",
+              fontWeight: 700,
+              transition: "all .2s ease-in",
+              borderRadius: "10px",
+            }}
           >
             {stat}
           </Button>

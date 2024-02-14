@@ -22,7 +22,7 @@ function page({ params: props }) {
       >
         <Grid container xs={12} maxHeight={"100vh"} gap={4} md={6}>
           <Grid item xs={12}>
-            <Image src={bankLogoTransparent} alt="logo" />
+            <Image src={bankLogoTransparent} priority alt="logo" />
           </Grid>
           <Grid container item>
             <LoginForm />

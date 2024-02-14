@@ -1,8 +1,9 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Grid, IconButton, Typography } from "@mui/material";
 import { handlePayrollCalculation } from "/utils/calculatePayroll";
 import { useContext, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   formatFileSize,
   lightenDarkenColor,
@@ -31,37 +32,6 @@ const styles = {
     width: "100%",
     justifyContent: "center",
   },
-  file: {
-    background: "linear-gradient(to bottom, #EEE, #DDD)",
-    borderRadius: 20,
-    display: "flex",
-    height: "100%",
-    width: "100%",
-    position: "relative",
-    zIndex: 10,
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-  info: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  size: {
-    backgroundColor: GREY_LIGHT,
-    borderRadius: 3,
-    marginBottom: "0.5em",
-    justifyContent: "center",
-    display: "flex",
-  },
-  name: {
-    backgroundColor: GREY_LIGHT,
-    borderRadius: 3,
-    fontSize: 12,
-    marginBottom: "0.5em",
-  },
   progressBar: {
     bottom: 14,
     position: "absolute",
@@ -72,33 +42,19 @@ const styles = {
   zoneHover: {
     borderColor: GREY_DIM,
   },
-  default: {
-    borderColor: GREY,
-  },
-  remove: {
-    height: 23,
-    position: "absolute",
-    right: 6,
-    top: 6,
-    width: 23,
-  },
 };
 
-export default function CSVReader({ setTableData, setFilteredTableData }) {
+export default function CSVReader() {
   const { CSVReader } = useCSVReader();
   const [zoneHover, setZoneHover] = useState(false);
   const [finishedUploading, setFinishedUploading] = useState(false);
   const { setValue, getValues } = useFormContext();
   const { setFilteredBenficaries, setBeneficaries } =
     useContext(agreementContext);
-  const [removeHoverColor, setRemoveHoverColor] = useState(
-    DEFAULT_REMOVE_HOVER_COLOR
-  );
+
   return (
     <CSVReader
       onUploadAccepted={(results) => {
-        // console.log("---------------------------");
-        // console.log(results, "data");
         setFinishedUploading(true);
         handlePayrollCalculation(
           results.data.slice(1, results.data.length - 1),
@@ -107,7 +63,6 @@ export default function CSVReader({ setTableData, setFilteredTableData }) {
           setValue,
           getValues
         );
-        // console.log("------------------------ss---");
         setZoneHover(false);
       }}
       onDragOver={(event) => {
@@ -127,46 +82,66 @@ export default function CSVReader({ setTableData, setFilteredTableData }) {
         Remove,
       }) => (
         <>
-          <div
+          <Box
             {...getRootProps()}
-            style={{ ...styles.zone, ...(zoneHover && styles.zoneHover) }}
+            sx={{ position: "relative" }}
+            style={{ ...styles.zone }}
           >
             {acceptedFile ? (
               <>
-                <div style={styles.file}>
-                  <div style={styles.info}>
-                    <span style={styles.size}>
-                      {formatFileSize(acceptedFile.size)}
-                    </span>
-                    <span style={styles.name}>{acceptedFile.name}</span>
-                  </div>
-                  {finishedUploading ? (
-                    <Box display={"flex"} my={4} justifyContent={"center"}>
+                {finishedUploading ? (
+                  <Grid
+                    container
+                    item
+                    gap={4}
+                    position={"relative"}
+                    width={"100%"}
+                    height={"100%"}
+                    borderRadius={"20px"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
+                    <Grid item>
+                      <Typography variant="h6">{acceptedFile.name}</Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="h6">
+                        {formatFileSize(acceptedFile.size)}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} textAlign={"center"}>
                       <Typography variant="h6">
                         Beneficaries Uploaded Successfully
                       </Typography>
-                    </Box>
-                  ) : (
-                    <div style={styles.progressBar}>
-                      <ProgressBar />
-                    </div>
-                  )}
-
-                  <div
-                    {...getRemoveFileProps()}
-                    style={styles.remove}
-                    onMouseOver={(event) => {
-                      event.preventDefault();
-                      setRemoveHoverColor(REMOVE_HOVER_COLOR_LIGHT);
-                    }}
-                    onMouseOut={(event) => {
-                      event.preventDefault();
-                      setRemoveHoverColor(DEFAULT_REMOVE_HOVER_COLOR);
-                    }}
-                  >
-                    <Remove color={removeHoverColor} />
+                    </Grid>
+                  </Grid>
+                ) : (
+                  <div style={styles.progressBar}>
+                    <ProgressBar />
                   </div>
-                </div>
+                )}
+
+                <Box
+                  position={"absolute"}
+                  top={10}
+                  right={10}
+                  {...getRemoveFileProps()}
+                  onMouseOver={(event) => {
+                    event.preventDefault();
+                  }}
+                  onMouseOut={(event) => {
+                    event.preventDefault();
+                  }}
+                >
+                  <DeleteIcon
+                    onClick={() => {
+                      setBeneficaries([]);
+                      setFilteredBenficaries([]);
+                      console.log("first");
+                    }}
+                    sx={{ color: "#EB5757", fontSize: 24, cursor: "pointer" }}
+                  />
+                </Box>
               </>
             ) : (
               <Box display="flex" flexDirection="column" alignItems="center">
@@ -187,7 +162,7 @@ export default function CSVReader({ setTableData, setFilteredTableData }) {
                 </Typography>
               </Box>
             )}
-          </div>
+          </Box>
         </>
       )}
     </CSVReader>

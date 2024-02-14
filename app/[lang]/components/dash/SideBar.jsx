@@ -13,7 +13,15 @@ function SideBar({ activeLink, setActiveLink }) {
     { title: "Manage Accounts", icon: <GroupAddIcon /> },
   ];
   return (
-    <Grid container item alignItems={"flex-start"} py={4} xs={12}>
+    <Grid
+      container
+      item
+      alignItems={"flex-start"}
+      justifyContent={"space-around"}
+      py={4}
+      bgcolor={"#FFFFFF"}
+      xs={12}
+    >
       <Grid container item xs={12} gap={4}>
         <Grid
           container
@@ -22,26 +30,19 @@ function SideBar({ activeLink, setActiveLink }) {
           item
           xs={12}
           gap={2}
-          borderBottom={"1px solid"}
-          sx={{
-            borderBottomColor: "primary.main",
-          }}
         >
           <Grid
             container
             justifyContent={"center"}
             alignItems={"center"}
             item
-            xs={4}
             sx={{
               border: "1px solid",
               borderColor: "primary.main",
               height: "80px",
               width: "80px",
-              maxHeight: "80px",
-              maxWidth: "80px",
               borderRadius: "50%",
-              boxShadow: " 0px 7px 6px -3px rgba(112,95,112,1)",
+              boxShadow: " 0px 7px 6px -5px rgba(112,95,112,1)",
             }}
           >
             <AccountCircleIcon sx={{ fontSize: 40, color: "primary.main" }} />
@@ -95,6 +96,7 @@ function SideBar({ activeLink, setActiveLink }) {
           <Image
             src={bankLogoShaped}
             alt="bank logo"
+            priority
             style={{ height: "150px", width: "100%" }}
           />
           <Typography variant="h6">

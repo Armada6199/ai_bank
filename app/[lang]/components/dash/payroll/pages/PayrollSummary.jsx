@@ -1,8 +1,10 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 import PaymentTable from "../../../tables/PaymentTable";
+import { useFormContext } from "react-hook-form";
 
 function PayrollSummary() {
+  const { getValues } = useFormContext();
   return (
     <Grid container item gap={4} p={4}>
       <Grid
@@ -15,37 +17,30 @@ function PayrollSummary() {
       >
         <Grid container item>
           <Grid item xs={6}>
-            <Typography variant="h6">Payment Agreements</Typography>
+            <Typography variant="h6" fontWeight={600}>
+              Payment Agreements
+            </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body1" fontWeight={600}>
-              PAY2042
+              {getValues("paymentAgreement")}
             </Typography>
           </Grid>
         </Grid>
         <Grid container item>
           <Grid item xs={6}>
-            <Typography variant="h6">File Id</Typography>
+            <Typography variant="h6" fontWeight={600}>
+              File Id
+            </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body1" fontWeight={600}>
-              203320011
+              {getValues("fileId")}
             </Typography>
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Typography variant="h4" fontWeight={700}>
-          Payroll Payment Details
-        </Typography>
-      </Grid>
-      <Grid
-        container
-        item
-        p={4}
-        border={"1px solid"}
-        borderColor={"primary.dark"}
-      >
+      <Grid container item>
         <PaymentTable />
       </Grid>
     </Grid>

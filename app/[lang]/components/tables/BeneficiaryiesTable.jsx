@@ -2,13 +2,14 @@
 import { Grid } from "@mui/material";
 import MUIDataTable from "mui-datatables";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "/styles/styles.css";
 import CustomTableFooter from "./CustomTableFooter";
 import { agreementContext } from "@/hooks/AgreementProvider";
 
 function BeneficiaryiesTable({}) {
   const { filterdBenficaries } = useContext(agreementContext);
+  const [forceUpdate, seForceUpdate] = useState(false);
   const options = {
     elevation: 0,
     pagination: true,
@@ -57,21 +58,30 @@ function BeneficiaryiesTable({}) {
   //   }, [activeStatus]);
   const columns = [
     {
-      label: "Beneficiary ",
+      name: "beneficiaryName",
+      label: "Beneficiary",
     },
     {
+      name: "beneficiaryId",
       label: "Account  ",
     },
     {
+      name: "bankName",
       label: "Bank ",
     },
     {
+      name: "amount",
       label: "Amount ",
     },
     {
+      name: "remarks",
       label: "Remarks ",
     },
   ];
+
+  useEffect(() => {
+    seForceUpdate((prev) => !prev);
+  }, [filterdBenficaries]);
   return (
     <Grid container item xs={12} gap={4} p={4}>
       <MUIDataTable

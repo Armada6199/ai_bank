@@ -20,7 +20,7 @@ function PaymentAgreements({}) {
         <FormControl fullWidth>
           <InputLabel>Pay Agreenments</InputLabel>
           <Select
-            defaultValue={null}
+            defaultValue={agreements[0].agreementId}
             {...register("paymentAgreement", {
               required: "Choose Payment Agreement",
             })}

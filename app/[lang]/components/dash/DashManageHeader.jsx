@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import AddAcc from "../modals/AddAcc";
 import PayrollModal from "../modals/Payroll";
+import AddIcon from "@mui/icons-material/Add";
 // import PayrollModal from "../modals/Payroll";
 import "/styles/styles.css";
+import Slide from "@mui/material/Slide";
 
 function DashManageHeader({ headerLocale, activeLink }) {
   const activeLocale =
@@ -22,21 +24,20 @@ function DashManageHeader({ headerLocale, activeLink }) {
     <Grid
       container
       item
-      gap={4}
-      wrap="nowrap"
       justifyContent={"space-between"}
       alignItems={"flex-start"}
       xs={12}
+      bgcolor={"#f3f3f3"}
     >
-      <Grid container item xs={12} gap={4}>
+      <Grid container item xs={12} md={8} gap={4}>
         <Grid
           container
           justifyContent={"center"}
           alignItems={"center"}
           xs={2}
           md={1}
-          height={"100px"}
           bgcolor={"#fff"}
+          height={"80px"}
           borderRadius={"10px"}
         >
           <CreditCardIcon sx={{ fontSize: 48, color: "primary.main" }} />
@@ -53,16 +54,13 @@ function DashManageHeader({ headerLocale, activeLink }) {
             </Typography>
           </Grid>
         </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-          alignSelf={"center"}
-          justifyContent={"flex-end"}
-          md={4}
-        >
+      </Grid>
+      <Grid container item xs={12} alignSelf={"center"} md={2}>
+        <Grid item xs={12}>
           <Button
             variant="contained"
+            fullWidth
+            startIcon={<AddIcon />}
             onClick={() =>
               activeLink == "Manage Payroll Request"
                 ? handleOpenPayroll()
@@ -74,7 +72,6 @@ function DashManageHeader({ headerLocale, activeLink }) {
           </Button>
         </Grid>
       </Grid>
-
       <Modal
         open={openAccount}
         onClose={handleCloseAcc}
@@ -84,7 +81,7 @@ function DashManageHeader({ headerLocale, activeLink }) {
           justifyContent: "center",
         }}
       >
-        <Grid container item xs={10}>
+        <Grid container item xs={8}>
           <AddAcc activeLocale={activeLocale} />
         </Grid>
       </Modal>
@@ -101,9 +98,8 @@ function DashManageHeader({ headerLocale, activeLink }) {
           container
           item
           xs={10}
-          maxHeight={"90vh"}
-          zIndex={99}
           overflow={"auto"}
+          maxHeight={"90vh"}
           className="payroll_modal"
         >
           <PayrollModal handleClosePayroll={handleClosePayroll} />

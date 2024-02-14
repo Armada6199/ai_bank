@@ -122,7 +122,7 @@ function DetailsTable({}) {
               <FormControl fullWidth>
                 <Select
                   sx={{ height: "40px" }}
-                  {...register("funding", { required: "Choose Funding" })}
+                  {...register("accountId", { required: "Choose Funding" })}
                 >
                   {accounts.map((acc) => (
                     <MenuItem value={acc.accountID}>{acc.accountID}</MenuItem>

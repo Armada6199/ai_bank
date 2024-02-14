@@ -7,17 +7,7 @@
 .tss-11quiee-MUIDataTable-paper {
   width: 100%;
 }
-/* .tss-11quiee-MUIDataTable-paper td {
-  border-bottom: 1px solid #96c11f;
-} */
-/* .tss-11quiee-MUIDataTable-paper thead {
-  border: 1px solid #96c11f;
-  border-color: 1px solid #96c11f;
-} */
-.tss-11quiee-MUIDataTable-paper {
-  border: 1px solid #96c11f;
-  border-color: 1px solid #96c11f;
-}
+
 .tss-1opebqo-MUIDataTable-caption {
   right: auto !important;
   left: auto !important;
@@ -25,15 +15,20 @@
 .mui-style-ltr-1j4t9z4-MuiStepper-root .MuiStepLabel-root {
   font-size: 40;
 }
-.tss-tlx3x1-MUIDataTableToolbar-root {
-  width: 100%;
-  display: flex;
-  margin: 0;
-  padding: 0;
+
+#summaryTable .tss-tlx3x1-MUIDataTableToolbar-root h4 {
+  position: absolute;
+  width: fit-content;
+  top: 0;
 }
-.tss-qbo1l6-MUIDataTableToolbar-actions {
+#summaryTable .tss-qbo1l6-MUIDataTableToolbar-actions {
   display: table;
-  width: 100%;
-  margin-bottom: 2em;
   padding: 0;
+  position: relative;
+}
+#summaryTable .tss-qbo1l6-MUIDataTableToolbar-actions svg {
+  color: #1a5632;
+}
+#summaryTable .tss-1cdcmys-MUIDataTable-responsiveBase {
+  border: 1px solid #96c11f;
 }

@@ -100,7 +100,7 @@ function AddAcc({ activeLocale }) {
                   <RadioGroup row>
                     {activeLocale.modal.accountStatus.map((type) => (
                       <FormControlLabel
-                        value="active"
+                        value={type}
                         control={<Radio />}
                         label={type}
                       />
