@@ -4,6 +4,8 @@ import TranslationWrapper from "/utils/ThemeRegistry";
 import DictionaryProvider from "/hooks/DictionaryProvider";
 import AgreementProvider from "/hooks/AgreementProvider.js";
 import { FormProvider, useForm } from "react-hook-form";
+import UserService from "@/hooks/KeycloakProvider";
+import KeycloakProvider from "@/hooks/KeycloakProvider";
 
 function Providers({ children, lang }) {
   const methods = useForm({

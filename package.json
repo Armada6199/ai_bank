@@ -30,6 +30,7 @@
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
     "jss-rtl": "^0.3.0",
+    "keycloak-js": "^23.0.6",
     "ldapjs": "^3.0.7",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.2",

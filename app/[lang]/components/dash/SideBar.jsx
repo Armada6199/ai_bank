@@ -1,11 +1,12 @@
 "use client";
 import { Grid, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import bankLogoShaped from "/public/assets/bankShaped.png";
 import Image from "next/image";
+import { keycloakContext } from "@/hooks/KeycloakProvider";
 
 function SideBar({ activeLink, setActiveLink }) {
   const dashLinks = [
