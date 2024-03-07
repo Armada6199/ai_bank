@@ -1,37 +1,93 @@
 "use client";
 import * as React from "react";
-import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
 import Image from "next/image";
 import bankLogo from "/public/assets/bankLogo.png";
-import { Grid } from "@mui/material";
+import {
+  Grid,
+  Popper,
+  Stack,
+  Button,
+  Toolbar,
+  ListItemButton,
+  ListItemText,
+  List,
+  Drawer,
+  Divider,
+  Box,
+  ListItem,
+  Paper,
+  Typography,
+} from "@mui/material";
 import Person2Icon from "@mui/icons-material/Person2";
 import TranslateIcon from "@mui/icons-material/Translate";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import EmailIcon from "@mui/icons-material/Email";
+import styled from "@emotion/styled";
+import { keycloakContext } from "@/hooks/KeycloakProvider";
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.primary,
+}));
+const PopperHOC = ({ id, updatePassword }) => {
+  switch (id) {
+    case "profile": {
+      return (
+        <Stack spacing={2} mt={4}>
+          <Item>Accounts</Item>
+          <Item>Payrolls</Item>
+          <Item onClick={updatePassword}>Change Password</Item>
+        </Stack>
+      );
+    }
+    case "email": {
+      return <Typography>email</Typography>;
+    }
+    case "notification": {
+      return <Typography>notification</Typography>;
+    }
+    case "language": {
+      return <Typography>Language</Typography>;
+    }
+    default:
+      return <Box />;
+  }
+};
 const drawerWidth = 240;
 const navItems = [
-  <Person2Icon sx={{ fontSize: 20, color: "primary.dark" }} />,
-  <TranslateIcon sx={{ fontSize: 20, color: "primary.dark" }} />,
-  <NotificationsIcon sx={{ fontSize: 20, color: "primary.dark" }} />,
-  <EmailIcon sx={{ fontSize: 20, color: "primary.dark" }} />,
+  {
+    icon: <Person2Icon sx={{ fontSize: 20, color: "primary.dark" }} />,
+    id: "profile",
+  },
+  {
+    icon: <TranslateIcon sx={{ fontSize: 20, color: "primary.dark" }} />,
+    id: "language",
+  },
+  {
+    icon: <NotificationsIcon sx={{ fontSize: 20, color: "primary.dark" }} />,
+    id: "notification",
+  },
+  {
+    icon: <EmailIcon sx={{ fontSize: 20, color: "primary.dark" }} />,
+    id: "email",
+  },
 ];
 
-function DrawerAppBar(props) {
+function Header(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const [openedPopper, setOpenedPopper] = React.useState({
+    profile: false,
+    language: false,
+    notification: false,
+    email: false,
+  });
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { updatePassword } = React.useContext(keycloakContext);
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -44,7 +100,7 @@ function DrawerAppBar(props) {
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.icon} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -97,8 +153,23 @@ function DrawerAppBar(props) {
             width={"36px"}
             height={"36px"}
             borderRadius={"5px"}
+            onClick={(e) => {
+              setOpenedPopper((prev) => {
+                return {
+                  email: false,
+                  notification: false,
+                  language: false,
+                  profile: false,
+                  [item.id]: !prev[item.id],
+                };
+              });
+              setAnchorEl(e.currentTarget);
+            }}
           >
-            {item}
+            {item.icon}
+            <Popper anchorEl={anchorEl} open={openedPopper[item.id]}>
+              <PopperHOC id={item.id} updatePassword={updatePassword} />
+            </Popper>
           </Grid>
         ))}
       </Grid>
@@ -129,12 +200,4 @@ function DrawerAppBar(props) {
   );
 }
 
-DrawerAppBar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
-
-export default DrawerAppBar;
+export default Header;

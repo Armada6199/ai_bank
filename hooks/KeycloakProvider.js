@@ -12,8 +12,6 @@ const KeycloakProvider = ({ children }) => {
     _kc
       .init({
         onLoad: "login-required",
-        // silentCheckSsoRedirectUri:
-        //   window.location.origin + "/silent-check-sso.html",
         pkceMethod: "S256",
       })
       .then(() => {
@@ -24,16 +22,13 @@ const KeycloakProvider = ({ children }) => {
   };
 
   useEffect(async () => {
-    // if (isInit) return;
-    // isInit.current = true;
     _kc = new Keycloak({
       url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
       realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM,
       clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
     });
-    initKeycloak();
 
-    console.log();
+    initKeycloak();
   }, []);
 
   const doLogin = _kc.login;
@@ -50,12 +45,16 @@ const KeycloakProvider = ({ children }) => {
     _kc.updateToken(5).then(successCallback).catch(doLogin);
 
   const getUsername = () => _kc.tokenParsed?.preferred_username;
-
+  const updatePassword = () =>
+    _kc.login({
+      action: "UPDATE_PASSWORD",
+    });
   const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
 
   return (
     <keycloakContext.Provider
       value={{
+        _kc,
         initKeycloak,
         doLogin,
         doLogout,
@@ -65,6 +64,7 @@ const KeycloakProvider = ({ children }) => {
         updateToken,
         getUsername,
         hasRole,
+        updatePassword,
       }}
     >
       {children}

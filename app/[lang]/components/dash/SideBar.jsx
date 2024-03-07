@@ -6,7 +6,6 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import bankLogoShaped from "/public/assets/bankShaped.png";
 import Image from "next/image";
-import { keycloakContext } from "@/hooks/KeycloakProvider";
 
 function SideBar({ activeLink, setActiveLink }) {
   const dashLinks = [
@@ -62,7 +61,7 @@ function SideBar({ activeLink, setActiveLink }) {
             <Grid
               container
               gap={1}
-              px={2}
+              p={1}
               onClick={() => setActiveLink(link.title)}
               sx={{
                 borderRight: activeLink === link.title ? "5px solid" : "",
@@ -74,9 +73,12 @@ function SideBar({ activeLink, setActiveLink }) {
                 activeLink === link.title ? "primary.light" : "transparent"
               }
               item
+              alignItems={"center"}
               xs={12}
             >
-              <Grid item>{link.icon}</Grid>
+              <Grid container xs={1} alignItems={"center"} item>
+                {link.icon}
+              </Grid>
               <Grid item>
                 <Typography fontWeight={600}>{link.title}</Typography>
               </Grid>

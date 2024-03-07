@@ -2,6 +2,7 @@ import React from "react";
 import Providers from "./components/Providers";
 import { i18n } from "../../i18.config";
 import "/styles/styles.css";
+import Header from "./components/layout/Header";
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
@@ -18,7 +19,10 @@ function RootLayout({ children, params: { lang } }) {
         />
       </head>
       <Providers lang={lang}>
-        <body>{children}</body>
+        <body>
+          <Header />
+          {children}
+        </body>
       </Providers>
     </html>
   );

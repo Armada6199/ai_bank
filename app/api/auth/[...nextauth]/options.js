@@ -1,27 +1,26 @@
-import { authenticateUser } from "/app/api/ldap";
-import CredentialsProvider from "next-auth/providers/credentials";
-const ldap = require("ldapjs");
+import KeycloakProvider from "next-auth/providers/keycloak";
 export const options = {
   pages: {
     signIn: "/",
   },
   providers: [
-    CredentialsProvider({
-      name: "LDAP",
-      async authorize(credentials) {
-        try {
-          const isAuth = await authenticateUser(
-            credentials.username,
-            credentials.password
-          );
-          console.log(isAuth);
-          if (isAuth.code === 200) {
-            return true;
-          } else return null;
-        } catch (error) {
-          console.log(error);
-          throw new Error(error);
-        }
+    KeycloakProvider({
+      clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET,
+      url: process.env.REACT_APP_KEYCLOAK_URL,
+      profile: (profile) => ({
+        ...profile,
+        id: profile.sub,
+      }),
+      authorization: {
+        params: {
+          grant_type: "authorization_code",
+
+          response_type: "code",
+        },
+      },
+      httpOptions: {
+        timeout: 30000,
       },
     }),
   ],
@@ -44,7 +43,6 @@ export const options = {
       return { ...session, ...token };
     },
   },
-
   strategy: "jwt",
   secret: process.env.NEXT_AUTH_SECRET,
 };

@@ -1,7 +1,8 @@
+import { Box } from "@mui/material";
 import React from "react";
 
 function loading() {
-  return <div>loading</div>;
+  return <Box>loading</Box>;
 }
 
 export default loading;
